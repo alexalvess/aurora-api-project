@@ -18,13 +18,19 @@ namespace Modelo.Infra.Data.Repository
             context.SaveChanges();
         }
 
-        public void Remove(int id)
+        public void Update(T obj)
+        {
+            context.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            context.SaveChanges();
+        }
+
+        public void Delete(int id)
         {
             context.Set<T>().Remove(SelectById(id));
             context.SaveChanges();
         }
 
-        public IList<T> SelectAll()
+        public IList<T> Select()
         {
             return context.Set<T>().ToList();
         }
@@ -32,12 +38,6 @@ namespace Modelo.Infra.Data.Repository
         public T SelectById(int id)
         {
             return context.Set<T>().Find(id);
-        }
-
-        public void Update(T obj)
-        {
-            context.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            context.SaveChanges();
         }
     }
 }

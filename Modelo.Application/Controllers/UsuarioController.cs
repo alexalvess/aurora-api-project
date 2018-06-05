@@ -16,8 +16,7 @@ namespace Modelo.Application.Controllers
     {
         private BaseService<Usuario> service = new BaseService<Usuario>();
 
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Usuario item)
+        public IActionResult Post([FromBody] Usuario item)
         {
             try
             {
@@ -34,8 +33,7 @@ namespace Modelo.Application.Controllers
             }
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update([FromBody] Usuario item)
+        public IActionResult Put([FromBody] Usuario item)
         {
             try
             {
@@ -52,8 +50,7 @@ namespace Modelo.Application.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
             try
             {
@@ -70,8 +67,7 @@ namespace Modelo.Application.Controllers
             }
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
             try
             {
@@ -83,8 +79,7 @@ namespace Modelo.Application.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public IActionResult Get(int id)
         {
             try
             {

@@ -12,25 +12,25 @@ namespace Modelo.Service.Services
     {
         private BaseRepository<T> repository = new BaseRepository<T>();
 
-        public T Add<V>(T obj) where V : AbstractValidator<T>
+        public T Post<V>(T obj) where V : AbstractValidator<T>
         {
             Validate(obj, Activator.CreateInstance<V>());
             repository.Insert(obj);
             return obj;
         }
 
-        public void Delete(int id) => repository.Remove(id);
-
-        public IList<T> Get() => repository.SelectAll();
-
-        public T GetById(int id) => repository.SelectById(id);
-
-        public T Update<V>(T obj) where V : AbstractValidator<T>
+        public T Put<V>(T obj) where V : AbstractValidator<T>
         {
             Validate(obj, Activator.CreateInstance<V>());
             repository.Update(obj);
             return obj;
         }
+
+        public void Delete(int id) => repository.Delete(id);
+
+        public IList<T> Get() => repository.Select();
+
+        public T Get(int id) => repository.SelectById(id);
 
         private void Validate(T obj, AbstractValidator<T> validator)
         {
