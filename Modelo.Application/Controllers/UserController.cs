@@ -12,20 +12,21 @@ namespace Modelo.Application.Controllers
 {
     [Produces("application/json")]
     [Route("api/Usuario")]
-    public class UsuarioController : Controller
+    public class UserController : Controller
     {
-        private BaseService<Usuario> service = new BaseService<Usuario>();
+        private BaseService<User> service = new BaseService<User>();
 
-        public IActionResult Post([FromBody] Usuario item)
+        public IActionResult Post([FromBody] User item)
         {
             try
             {
-                if (item == null)
-                    return NotFound();
-
-                service.Add<UsuarioValidator>(item);
+                service.Post<UserValidator>(item);
 
                 return new ObjectResult(item.Id);
+            }
+            catch(ArgumentNullException ex)
+            {
+                return NotFound(ex);
             }
             catch (Exception ex)
             {
@@ -33,16 +34,17 @@ namespace Modelo.Application.Controllers
             }
         }
 
-        public IActionResult Put([FromBody] Usuario item)
+        public IActionResult Put([FromBody] User item)
         {
             try
             {
-                if (item == null)
-                    return NotFound();
-
-                service.Update<UsuarioValidator>(item);
+                service.Put<UserValidator>(item);
 
                 return new ObjectResult(item);
+            }
+            catch(ArgumentNullException ex)
+            {
+                return NotFound(ex);
             }
             catch (Exception ex)
             {
@@ -54,12 +56,13 @@ namespace Modelo.Application.Controllers
         {
             try
             {
-                if (id == 0)
-                    return NotFound();
-
                 service.Delete(id);
 
                 return new NoContentResult();
+            }
+            catch(ArgumentException ex)
+            {
+                return NotFound(ex);
             }
             catch (Exception ex)
             {
@@ -83,10 +86,11 @@ namespace Modelo.Application.Controllers
         {
             try
             {
-                if (id == 0)
-                    return NotFound();
-
-                return new ObjectResult(service.GetById(id));
+                return new ObjectResult(service.Get(id));
+            }
+            catch(ArgumentException ex)
+            {
+                return NotFound(ex);
             }
             catch (Exception ex)
             {

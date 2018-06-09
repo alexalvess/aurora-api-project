@@ -9,7 +9,7 @@ namespace Modelo.Infra.Data.Context
 {
     public class MySqlContext : DbContext
     {
-        public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<User> User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -21,7 +21,7 @@ namespace Modelo.Infra.Data.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Usuario>(new UsuarioMap().Configure);
+            modelBuilder.Entity<User>(new UserMap().Configure);
         }
     }
 }

@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Modelo.Infra.Data.Mapping
 {
-    public class UsuarioMap : IEntityTypeConfiguration<Usuario>
+    public class UserMap : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<Usuario> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("Usuario");
+            builder.ToTable("User");
 
             builder.HasKey(c => c.Id);
 
@@ -19,13 +19,13 @@ namespace Modelo.Infra.Data.Mapping
                 .IsRequired()
                 .HasColumnName("Cpf");
 
-            builder.Property(c => c.DataNascimento)
+            builder.Property(c => c.BirthDate)
                 .IsRequired()
-                .HasColumnName("DataNascimento");
+                .HasColumnName("BirthDate");
 
-            builder.Property(c => c.Nome)
+            builder.Property(c => c.Name)
                 .IsRequired()
-                .HasColumnName("Nome");
+                .HasColumnName("Name");
         }
     }
 }

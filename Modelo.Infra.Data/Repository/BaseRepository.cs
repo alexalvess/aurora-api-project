@@ -26,7 +26,7 @@ namespace Modelo.Infra.Data.Repository
 
         public void Delete(int id)
         {
-            context.Set<T>().Remove(SelectById(id));
+            context.Set<T>().Remove(Select(id));
             context.SaveChanges();
         }
 
@@ -35,7 +35,7 @@ namespace Modelo.Infra.Data.Repository
             return context.Set<T>().ToList();
         }
 
-        public T SelectById(int id)
+        public T Select(int id)
         {
             return context.Set<T>().Find(id);
         }

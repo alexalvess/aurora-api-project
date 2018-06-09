@@ -13,7 +13,7 @@ namespace Modelo.Domain.Interfaces
 
         void Delete(int id);
 
-        T SelectById(int id);
+        T Select(int id);
 
         IList<T> Select();
     }

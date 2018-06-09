@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Modelo.Domain.Entities
 {
-    public class Usuario : BaseEntity
+    public class User : BaseEntity
     {
-        public string Nome { get; set; }
+        public string Name { get; set; }
 
-        public string DataNascimento { get; set; }
+        public DateTime BirthDate { get; set; }
 
         public string Cpf { get; set; }
     }
