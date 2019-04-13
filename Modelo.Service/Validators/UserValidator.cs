@@ -27,7 +27,7 @@ namespace Modelo.Service.Validators
 
             RuleFor(c => c.Name)
                 .NotEmpty().WithMessage("Is necessary to inform the name.")
-                .NotNull().WithMessage("Is necessary to inform the birth date.");
+                .NotNull().WithMessage("Is necessary to inform the name.");
         }
     }
 }
