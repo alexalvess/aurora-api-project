@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Aurora.Domain.Entities
 {
-    public class User : BaseEntity
+    public class User : BaseEntity<int>
     {
         public string Name { get; set; }
 
