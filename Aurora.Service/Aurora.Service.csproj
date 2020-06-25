@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Modelo.Domain\Modelo.Domain.csproj" />
-    <ProjectReference Include="..\Modelo.Infra.Data\Modelo.Infra.Data.csproj" />
+    <ProjectReference Include="..\Aurora.Domain\Aurora.Domain.csproj" />
+    <ProjectReference Include="..\Aurora.Infra.Data\Aurora.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>

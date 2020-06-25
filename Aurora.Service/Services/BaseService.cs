@@ -1,12 +1,12 @@
 ﻿using FluentValidation;
-using Modelo.Domain.Entities;
-using Modelo.Domain.Interfaces;
-using Modelo.Infra.Data.Repository;
+using Aurora.Domain.Entities;
+using Aurora.Domain.Interfaces;
+using Aurora.Infra.Data.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Modelo.Service.Services
+namespace Aurora.Service.Services
 {
     public class BaseService<T> : IService<T> where T : BaseEntity
     {

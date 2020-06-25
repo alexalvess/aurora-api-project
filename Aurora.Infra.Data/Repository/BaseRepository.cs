@@ -1,12 +1,12 @@
-﻿using Modelo.Domain.Entities;
-using Modelo.Domain.Interfaces;
-using Modelo.Infra.Data.Context;
+﻿using Aurora.Domain.Entities;
+using Aurora.Domain.Interfaces;
+using Aurora.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Modelo.Infra.Data.Repository
+namespace Aurora.Infra.Data.Repository
 {
     public class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
