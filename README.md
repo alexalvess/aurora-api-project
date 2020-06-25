@@ -10,10 +10,10 @@ The project's goals is to show that is possible to create an architecture more s
 2. Use the default connection string or:
     2.1. Install and configure [MySql](https://dev.mysql.com/downloads/mysql/), if you want.
     2.2. Inform the connection string on Aroura.Infra.Data/Context/MySqlContext.cs, if necessary
-        2.2.1. Put the server name on [SERVER] tag
-        2.2.2. Put the port number on [PORT] tag
-        2.2.3. Put the user name database on [USER] tag
-        2.2.4. Put the password database on [PASSWORD] tag
+    * Put the server name on [SERVER] tag
+    * Put the port number on [PORT] tag
+    * Put the user name database on [USER] tag
+    * Put the password database on [PASSWORD] tag
 4. Finally, build and run the application
 
 ## MySql Migrations:
