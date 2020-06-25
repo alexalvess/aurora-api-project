@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Aurora.Infra.CrossCutting.InversionOfControl;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Aurora.Application
 {
@@ -20,17 +19,7 @@ namespace Aurora.Application
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(option => option.EnableEndpointRouting = false);
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1",
-                    new OpenApiInfo
-                    {
-                        Title = "Aurora API",
-                        Version = "v1",
-                        Description = "API REST criada com ASP.NET Core 3.1",
-                    });
-            });
+            services.AddSwaggerDependency();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -39,14 +28,7 @@ namespace Aurora.Application
                 app.UseDeveloperExceptionPage();
 
             app.UseMvc();
-
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Aurora API");
-                c.DocumentTitle = "Aurora API";
-                c.DocExpansion(DocExpansion.List);
-            });
+            app.UseSwaggerDependency();
         }
     }
 }
