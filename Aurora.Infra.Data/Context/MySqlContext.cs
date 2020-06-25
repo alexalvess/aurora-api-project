@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Aurora.Domain.Entities;
+﻿using Aurora.Domain.Entities;
 using Aurora.Infra.Data.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace Aurora.Infra.Data.Context
 {
@@ -14,7 +11,7 @@ namespace Aurora.Infra.Data.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-                optionsBuilder.UseMySql("Server=[SERVIDOR];Port=[PORTA];Database=Aurora;Uid=[USUARIO];Pwd=[SENHA]");
+                optionsBuilder.UseMySql("Server=[SERVER];Port=[PORT];Database=Aurora;Uid=[USER];Pwd=[PASSWORD]");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,47 +1,56 @@
-# O que é o projeto Aurora?
-É um projeto open source, escrito em .Net Core, atualmente na versão 3.1.
+# What is Aurora project?
+It's an open source project, written in .NET Core, currently in version 3.1.
 
-O objetivo deste projeto é mostrar que é possível criar uma arquitetura, mais simplificada, utilizando alguns conceitos do DDD (Design Domain Driven).
+The project's goals is to show that is possible to create an architecture more simple than others and using some concepts like DDD (Design Driven Design).
 
-## Como utilizar:
-Para informações sobre a arquitetura e o que está contido neste projeto, leia este [artigo](https://medium.com/@alexalves_85598/criando-uma-api-em-net-core-baseado-na-arquitetura-ddd-2c6a409c686).
+## How to use:
+1. Clone this project to into your machine
+2. Install and configure [MySql](https://dev.mysql.com/downloads/mysql/).
+3. Inform the connection string on Aroura.Infra.Data/Context/MySqlContext.cs
+   3.1. Put the server name on [SERVER] tag
+   3.2. Put the port number on [PORT] tag
+   3.3. Put the user name database on [USER] tag
+   3.4. Put the password database on [PASSWORD] tag
+4. Finally, build and run the application
 
-## Tecnologias  implementadas:
+For more information about this project, sse this [article](https://medium.com/@alexalves_85598/criando-uma-api-em-net-core-baseado-na-arquitetura-ddd-2c6a409c686).
+
+## Technologies implemented:
 * ASP.NET Core 3.1 (com .NET Core 3.1)
 * Entity Framework Core 2.0.2
 * FluentValidation 7.5.2
 * Swagger UI 5.5.0
 * MySql Database Connection
 
-## Arquitetura:
-* Arquitetura em Camadas
-* Domain Driven Des]
+## Architecture:
+* Layer architecture
+* Domain Driven Design
 
-## Novidades
-**v1.1 - 24/06/2020**
-* Alteração do nome do projeto e informações
-* Atualização do projeto para .NET Core 3.1
-* Adição do Swagger para documentação da API
-* Correção nos end-points
-* Publicação na Azure
+## News:
+**v1.1 --- 2020-06-24**
+* Updated the project name
+* Updated the project's SDK to .NET Core 3.1 version
+* Added the Swagger framework to document the API
+* Corrections to end-points
+* Published in [Azure](http://aurora-project.azurewebsites.net/swagger/index.html)
 
-**v1.0 - 09/06/2018**
-* Criação do projeto em .NET Core 2.0
-* Criação do projeto em camadas
-* Criação da camada Service para regras de negócio
-* Utilização de FluentValidation
-* Conexão com banco de dados MySql
-* Utilização do EntityFramework
+**v1.0 --- 2018-06-09**
+* Create the project in .NET Core 2.0 version
+* Structured the project on layer architecture 
+* Used the Service layer to business rules
+* Used the FluentValidation library
+* Configured the connection to MySql database
+* Used EntityFramework
 
-## Por que Aurora?
-O nome Aurora veio do evento natural chamado Aurora Boreal. É um evento científico descrito pela interação entre a camada magnética da terra e partículas energizadas oriundas do vento solar.
+## Why Aurora?
+The name Aurora came from the natural event called Aurora Borealis. It is a scientific event described by the interaction between the earth's magnetic layer and energized particles from the solar wind.
 
-Um curiosidade sobre tal evento é que nem sempre o que vemos em fotografias é a mesma imagem que é visto ao vivo.
+A curiosity about such an event is that what we see in photographs is not always the same image that is seen live.
 
-Saiba mais [aqui](https://www.hipercultura.com/fenomenos-naturais/).
+For more information, look this [link](https://www.hipercultura.com/fenomenos-naturais/).
 
-## Estamos online!
-Veja o projeto funcionando na [Azure](http://aurora-project.azurewebsites.net/swagger/index.html).
+## We're online!
+See the project in [Azure](http://aurora-project.azurewebsites.net/swagger/index.html).
 
-## Sobre:
-O projeto Aurora foi desenvolvido por [Alex Alves](https://www.linkedin.com/in/alexalvess/).
+## About:
+The Aurora project was developed by [Alex Alves](https://www.linkedin.com/in/alexalvess/).
