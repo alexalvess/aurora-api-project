@@ -1,11 +1,16 @@
 ﻿using System.Collections.Generic;
 using Aurora.Domain.Entities;
 using Aurora.Domain.Interfaces;
+using Aurora.Infra.Data.Context;
 
 namespace Aurora.Infra.Data.Repository
 {
     public class UserRepository : BaseRepository<User, int>, IRepositoryUser
     {
+        public UserRepository(MySqlContext mySqlContext) : base(mySqlContext)
+        {
+        }
+
         public void Remove(int id) =>
             base.Delete(id);
 

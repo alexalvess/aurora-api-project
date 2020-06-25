@@ -7,35 +7,35 @@ namespace Aurora.Infra.Data.Repository
 {
     public class BaseRepository<T, B> where T : BaseEntity<B>
     {
-        protected readonly MySqlContext _context;
+        protected readonly MySqlContext _mySqlContext;
 
-        public BaseRepository()
+        public BaseRepository(MySqlContext mySqlContext)
         {
-            _context = new MySqlContext();
+            _mySqlContext = mySqlContext;
         }
 
         protected virtual void Insert(T obj)
         {
-            _context.Set<T>().Add(obj);
-            _context.SaveChanges();
+            _mySqlContext.Set<T>().Add(obj);
+            _mySqlContext.SaveChanges();
         }
 
         protected virtual void Update(T obj)
         {
-            _context.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            _context.SaveChanges();
+            _mySqlContext.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _mySqlContext.SaveChanges();
         }
 
         protected virtual void Delete(int id)
         {
-            _context.Set<T>().Remove(Select(id));
-            _context.SaveChanges();
+            _mySqlContext.Set<T>().Remove(Select(id));
+            _mySqlContext.SaveChanges();
         }
 
         protected virtual IList<T> Select() =>
-            _context.Set<T>().ToList();
+            _mySqlContext.Set<T>().ToList();
 
         protected virtual T Select(int id) =>
-            _context.Set<T>().Find(id);
+            _mySqlContext.Set<T>().Find(id);
     }
 }

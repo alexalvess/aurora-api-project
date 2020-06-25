@@ -1,7 +1,6 @@
 ﻿using System;
 using Aurora.Domain.Entities;
 using Aurora.Domain.Interfaces;
-using Aurora.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aurora.Application.Controllers
@@ -12,8 +11,8 @@ namespace Aurora.Application.Controllers
     {
         private readonly IServiceUser _serviceUser;
 
-        public UserController() =>
-            _serviceUser = new UserService();
+        public UserController(IServiceUser serviceUser) =>
+            _serviceUser = serviceUser;
 
 
         [HttpPost]

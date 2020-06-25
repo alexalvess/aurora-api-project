@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Aurora.Domain.Entities;
 using Aurora.Domain.Interfaces;
-using Aurora.Infra.Data.Repository;
 using Aurora.Service.Validators;
 using FluentValidation;
 
@@ -12,8 +11,8 @@ namespace Aurora.Service.Services
     {
         private readonly IRepositoryUser _repositoryUser;
 
-        public UserService() =>
-            _repositoryUser = new UserRepository();
+        public UserService(IRepositoryUser repositoryUser) =>
+            _repositoryUser = repositoryUser;
 
         public IList<User> Browse() =>
             _repositoryUser.GetAll();
