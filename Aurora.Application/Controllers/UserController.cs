@@ -1,12 +1,12 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc;
 using Aurora.Domain.Entities;
 using Aurora.Service.Services;
 using Aurora.Service.Validators;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Aurora.Application.Controllers
 {
-    [Route("api/Usuario")]
+    [Route("api/user")]
     [ApiController]
     public class UserController : Controller
     {
@@ -19,7 +19,7 @@ namespace Aurora.Application.Controllers
             {
                 service.Post<UserValidator>(item);
 
-                return new ObjectResult(item.Id);
+                return Ok(item.Id);
             }
             catch (ArgumentNullException ex)
             {
@@ -38,7 +38,7 @@ namespace Aurora.Application.Controllers
             {
                 service.Put<UserValidator>(item);
 
-                return new ObjectResult(item);
+                return Ok(item);
             }
             catch (ArgumentNullException ex)
             {
@@ -57,7 +57,7 @@ namespace Aurora.Application.Controllers
             {
                 service.Delete(id);
 
-                return new NoContentResult();
+                return NoContent();
             }
             catch (ArgumentException ex)
             {
@@ -74,7 +74,7 @@ namespace Aurora.Application.Controllers
         {
             try
             {
-                return new ObjectResult(service.Get());
+                return Ok(service.Get());
             }
             catch (Exception ex)
             {
@@ -87,7 +87,7 @@ namespace Aurora.Application.Controllers
         {
             try
             {
-                return new ObjectResult(service.Get(id));
+                return Ok(service.Get(id));
             }
             catch (ArgumentException ex)
             {
