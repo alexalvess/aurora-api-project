@@ -13,11 +13,11 @@ namespace Aurora.Application.Controllers
         private BaseService<User> service = new BaseService<User>();
 
         [HttpPost]
-        public IActionResult Post([FromBody] User item)
+        public IActionResult Register([FromBody] User item)
         {
             try
             {
-                service.Post<UserValidator>(item);
+                service.Insert<UserValidator>(item);
 
                 return Ok(item.Id);
             }
@@ -32,11 +32,11 @@ namespace Aurora.Application.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] User item)
+        public IActionResult Update([FromBody] User item)
         {
             try
             {
-                service.Put<UserValidator>(item);
+                service.Update<UserValidator>(item);
 
                 return Ok(item);
             }
@@ -50,8 +50,8 @@ namespace Aurora.Application.Controllers
             }
         }
 
-        [HttpDelete]
-        public IActionResult Delete(int id)
+        [HttpDelete("{id}")]
+        public IActionResult Remove([FromRoute] int id)
         {
             try
             {
@@ -70,11 +70,11 @@ namespace Aurora.Application.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult RecoverAll()
         {
             try
             {
-                return Ok(service.Get());
+                return Ok(service.Browser());
             }
             catch (Exception ex)
             {
@@ -83,11 +83,11 @@ namespace Aurora.Application.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Recover([FromRoute] int id)
         {
             try
             {
-                return Ok(service.Get(id));
+                return Ok(service.Recover(id));
             }
             catch (ArgumentException ex)
             {

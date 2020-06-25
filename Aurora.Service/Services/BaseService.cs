@@ -1,10 +1,9 @@
-﻿using FluentValidation;
+﻿using System;
+using System.Collections.Generic;
 using Aurora.Domain.Entities;
 using Aurora.Domain.Interfaces;
 using Aurora.Infra.Data.Repository;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using FluentValidation;
 
 namespace Aurora.Service.Services
 {
@@ -12,7 +11,7 @@ namespace Aurora.Service.Services
     {
         private BaseRepository<T> repository = new BaseRepository<T>();
 
-        public T Post<V>(T obj) where V : AbstractValidator<T>
+        public T Insert<V>(T obj) where V : AbstractValidator<T>
         {
             Validate(obj, Activator.CreateInstance<V>());
 
@@ -20,7 +19,7 @@ namespace Aurora.Service.Services
             return obj;
         }
 
-        public T Put<V>(T obj) where V : AbstractValidator<T>
+        public T Update<V>(T obj) where V : AbstractValidator<T>
         {
             Validate(obj, Activator.CreateInstance<V>());
 
@@ -36,9 +35,9 @@ namespace Aurora.Service.Services
             repository.Delete(id);
         }
 
-        public IList<T> Get() => repository.Select();
+        public IList<T> Browser() => repository.Select();
 
-        public T Get(int id)
+        public T Recover(int id)
         {
             if (id == 0)
                 throw new ArgumentException("The id can't be zero.");
