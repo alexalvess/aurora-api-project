@@ -9,16 +9,17 @@ namespace Aurora.Application
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
+        public Startup(IConfiguration configuration) =>
             Configuration = configuration;
-        }
 
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddMySqlDependency(Configuration);
+            services.AddMySqlRepositoryDependency();
+            services.AddServiceDependency();
             services.AddSwaggerDependency();
         }
 

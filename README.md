@@ -30,11 +30,14 @@ For more information about this project, sse this [article](https://medium.com/@
 * FluentValidation 7.5.2
 * Swagger UI 5.5.0
 * MySql Database Connection
+* .NET Core Native DI
 
 ## Architecture:
 * Layer architecture
 * Domain Driven Design
 * Clean Code
+* Interface Segregation Principle
+* Dependency Inversion Principle (S O L I **D**)
 * Interface Segregation Principle (S O L **I** D)
 
 ## News:
