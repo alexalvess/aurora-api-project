@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Application", "1 - Application", "{8E66963F-7763-4842-8104-82900E8DC413}"
 EndProject
@@ -15,15 +15,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1 - Data", "4.1 - Data", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2 - CrossCutting", "4.2 - CrossCutting", "{FF69E2EF-A8AB-41F4-81CB-DD936FA14BD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modelo.Application", "Modelo.Application\Modelo.Application.csproj", "{A5C7D9EB-1FC7-4169-B6FB-86D7F909AABE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Application", "Aurora.Application\Aurora.Application.csproj", "{A5C7D9EB-1FC7-4169-B6FB-86D7F909AABE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modelo.Domain", "Modelo.Domain\Modelo.Domain.csproj", "{4F925C30-87F8-4D1A-8794-7267D9B22072}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Domain", "Aurora.Domain\Aurora.Domain.csproj", "{4F925C30-87F8-4D1A-8794-7267D9B22072}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modelo.Service", "Modelo.Service\Modelo.Service.csproj", "{F0F76DA1-0C46-4A19-A18A-9397C4519DA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Service", "Aurora.Service\Aurora.Service.csproj", "{F0F76DA1-0C46-4A19-A18A-9397C4519DA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modelo.Infra.Data", "Modelo.Infra.Data\Modelo.Infra.Data.csproj", "{8695D5D0-0D56-4B00-8944-AA25F3B0C0B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Infra.Data", "Aurora.Infra.Data\Aurora.Infra.Data.csproj", "{8695D5D0-0D56-4B00-8944-AA25F3B0C0B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modelo.Infra.CrossCutting", "Modelo.Infra.CrossCutting\Modelo.Infra.CrossCutting.csproj", "{DB868361-86CD-4264-9B13-35F6DD2CC9C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.Infra.CrossCutting", "Aurora.Infra.CrossCutting\Aurora.Infra.CrossCutting.csproj", "{DB868361-86CD-4264-9B13-35F6DD2CC9C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5157F80E-AD2A-4300-AD5D-1863876512DF}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

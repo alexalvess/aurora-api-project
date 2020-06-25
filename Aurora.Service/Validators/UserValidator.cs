@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
-using Modelo.Domain.Entities;
+using Aurora.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Modelo.Service.Validators
+namespace Aurora.Service.Validators
 {
     public class UserValidator : AbstractValidator<User>
     {

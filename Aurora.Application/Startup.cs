@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace Modelo.Application
+namespace Aurora.Application
 {
     public class Startup
     {
@@ -26,7 +26,7 @@ namespace Modelo.Application
                 c.SwaggerDoc("v1",
                     new OpenApiInfo
                     {
-                        Title = "Modelo API",
+                        Title = "Aurora API",
                         Version = "v1",
                         Description = "API REST criada com ASP.NET Core 3.1",
                     });
@@ -43,8 +43,8 @@ namespace Modelo.Application
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Modelo API");
-                c.DocumentTitle = "Modelo API";
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Aurora API");
+                c.DocumentTitle = "Aurora API";
                 c.DocExpansion(DocExpansion.List);
             });
         }

@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Modelo.Domain.Entities;
+using Aurora.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Modelo.Infra.Data.Mapping
+namespace Aurora.Infra.Data.Mapping
 {
     public class UserMap : IEntityTypeConfiguration<User>
     {

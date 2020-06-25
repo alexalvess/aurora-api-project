@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Modelo.Domain.Entities
+namespace Aurora.Domain.Entities
 {
     public class User : BaseEntity
     {

@@ -1,9 +1,9 @@
-﻿using Modelo.Domain.Entities;
+﻿using Aurora.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Modelo.Domain.Interfaces
+namespace Aurora.Domain.Interfaces
 {
     public interface IRepository<T> where T : BaseEntity
     {

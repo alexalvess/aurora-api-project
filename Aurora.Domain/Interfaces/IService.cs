@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
-using Modelo.Domain.Entities;
+using Aurora.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Modelo.Domain.Interfaces
+namespace Aurora.Domain.Interfaces
 {
     public interface IService<T> where T : BaseEntity
     {

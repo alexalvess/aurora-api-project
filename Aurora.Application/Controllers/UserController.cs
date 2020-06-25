@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using Modelo.Domain.Entities;
-using Modelo.Service.Services;
-using Modelo.Service.Validators;
+using Aurora.Domain.Entities;
+using Aurora.Service.Services;
+using Aurora.Service.Validators;
 
-namespace Modelo.Application.Controllers
+namespace Aurora.Application.Controllers
 {
     [Route("api/Usuario")]
     [ApiController]

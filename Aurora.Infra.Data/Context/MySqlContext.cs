@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Modelo.Domain.Entities;
-using Modelo.Infra.Data.Mapping;
+using Aurora.Domain.Entities;
+using Aurora.Infra.Data.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Modelo.Infra.Data.Context
+namespace Aurora.Infra.Data.Context
 {
     public class MySqlContext : DbContext
     {
@@ -14,7 +14,7 @@ namespace Modelo.Infra.Data.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-                optionsBuilder.UseMySql("Server=[SERVIDOR];Port=[PORTA];Database=modelo;Uid=[USUARIO];Pwd=[SENHA]");
+                optionsBuilder.UseMySql("Server=[SERVIDOR];Port=[PORTA];Database=Aurora;Uid=[USUARIO];Pwd=[SENHA]");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
