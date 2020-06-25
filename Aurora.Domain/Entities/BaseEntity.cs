@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Aurora.Domain.Entities
+﻿namespace Aurora.Domain.Entities
 {
-    public abstract class BaseEntity
+    public abstract class BaseEntity<T>
     {
-        public virtual int Id { get; set; }
+        public virtual T Id { get; set; }
     }
 }

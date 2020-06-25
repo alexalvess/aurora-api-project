@@ -1,7 +1,7 @@
 ﻿using System;
 using Aurora.Domain.Entities;
+using Aurora.Domain.Interfaces;
 using Aurora.Service.Services;
-using Aurora.Service.Validators;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aurora.Application.Controllers
@@ -10,14 +10,18 @@ namespace Aurora.Application.Controllers
     [ApiController]
     public class UserController : Controller
     {
-        private BaseService<User> service = new BaseService<User>();
+        private readonly IServiceUser _serviceUser;
+
+        public UserController() =>
+            _serviceUser = new UserService();
+
 
         [HttpPost]
         public IActionResult Register([FromBody] User item)
         {
             try
             {
-                service.Insert<UserValidator>(item);
+                _serviceUser.Insert(item);
 
                 return Ok(item.Id);
             }
@@ -36,7 +40,7 @@ namespace Aurora.Application.Controllers
         {
             try
             {
-                service.Update<UserValidator>(item);
+                _serviceUser.Update(item);
 
                 return Ok(item);
             }
@@ -55,7 +59,7 @@ namespace Aurora.Application.Controllers
         {
             try
             {
-                service.Delete(id);
+                _serviceUser.Delete(id);
 
                 return NoContent();
             }
@@ -74,7 +78,7 @@ namespace Aurora.Application.Controllers
         {
             try
             {
-                return Ok(service.Browser());
+                return Ok(_serviceUser.Browse());
             }
             catch (Exception ex)
             {
@@ -87,7 +91,7 @@ namespace Aurora.Application.Controllers
         {
             try
             {
-                return Ok(service.Recover(id));
+                return Ok(_serviceUser.RecoverById(id));
             }
             catch (ArgumentException ex)
             {

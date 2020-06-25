@@ -1,43 +1,41 @@
-﻿using Aurora.Domain.Entities;
-using Aurora.Domain.Interfaces;
-using Aurora.Infra.Data.Context;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Aurora.Domain.Entities;
+using Aurora.Infra.Data.Context;
 
 namespace Aurora.Infra.Data.Repository
 {
-    public class BaseRepository<T> : IRepository<T> where T : BaseEntity
+    public class BaseRepository<T, B> where T : BaseEntity<B>
     {
-        private MySqlContext context = new MySqlContext();
+        protected readonly MySqlContext _context;
 
-        public void Insert(T obj)
+        public BaseRepository()
         {
-            context.Set<T>().Add(obj);
-            context.SaveChanges();
+            _context = new MySqlContext();
         }
 
-        public void Update(T obj)
+        protected virtual void Insert(T obj)
         {
-            context.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            context.SaveChanges();
+            _context.Set<T>().Add(obj);
+            _context.SaveChanges();
         }
 
-        public void Delete(int id)
+        protected virtual void Update(T obj)
         {
-            context.Set<T>().Remove(Select(id));
-            context.SaveChanges();
+            _context.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.SaveChanges();
         }
 
-        public IList<T> Select()
+        protected virtual void Delete(int id)
         {
-            return context.Set<T>().ToList();
+            _context.Set<T>().Remove(Select(id));
+            _context.SaveChanges();
         }
 
-        public T Select(int id)
-        {
-            return context.Set<T>().Find(id);
-        }
+        protected virtual IList<T> Select() =>
+            _context.Set<T>().ToList();
+
+        protected virtual T Select(int id) =>
+            _context.Set<T>().Find(id);
     }
 }
