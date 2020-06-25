@@ -37,7 +37,8 @@ For more information about this project, sse this [article](https://medium.com/@
 * Domain Driven Design
 * Clean Code
 * Interface Segregation Principle
-* Dependency Inversion Principle
+* Dependency Inversion Principle (S O L I **D**)
+* Interface Segregation Principle (S O L **I** D)
 
 ## News:
 **v1.1 --- 2020-06-24**
