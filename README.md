@@ -7,13 +7,20 @@ The project's goals is to show that is possible to create an architecture more s
 
 ## How to use:
 1. Clone this project to into your machine
-2. Install and configure [MySql](https://dev.mysql.com/downloads/mysql/).
-3. Inform the connection string on Aroura.Infra.Data/Context/MySqlContext.cs
-   3.1. Put the server name on [SERVER] tag
-   3.2. Put the port number on [PORT] tag
-   3.3. Put the user name database on [USER] tag
-   3.4. Put the password database on [PASSWORD] tag
+2. Use the default connection string or:
+    2.1. Install and configure [MySql](https://dev.mysql.com/downloads/mysql/), if you want.
+    2.2. Inform the connection string on Aroura.Infra.Data/Context/MySqlContext.cs, if necessary
+        2.2.1. Put the server name on [SERVER] tag
+        2.2.2. Put the port number on [PORT] tag
+        2.2.3. Put the user name database on [USER] tag
+        2.2.4. Put the password database on [PASSWORD] tag
 4. Finally, build and run the application
+
+## MySql Migrations:
+1. Open your Package Manager Console
+2. Change the default project to Aurora.Infra.Data
+3. Run command "Add-Migration [NAME OF YOUR MIGRATION]"
+4. Run command "Update-Database"
 
 For more information about this project, sse this [article](https://medium.com/@alexalves_85598/criando-uma-api-em-net-core-baseado-na-arquitetura-ddd-2c6a409c686).
 
@@ -27,6 +34,8 @@ For more information about this project, sse this [article](https://medium.com/@
 ## Architecture:
 * Layer architecture
 * Domain Driven Design
+* Clean Code
+* Interface Segregation Principle
 
 ## News:
 **v1.1 --- 2020-06-24**

@@ -11,7 +11,7 @@ namespace Aurora.Infra.Data.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-                optionsBuilder.UseMySql("Server=[SERVER];Port=[PORT];Database=Aurora;Uid=[USER];Pwd=[PASSWORD]");
+                optionsBuilder.UseMySql("Server=db4free.net;Port=3306;Database=aurora_api_proj;Uid=aurora_api_proj;Pwd=12345678");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
