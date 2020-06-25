@@ -35,7 +35,7 @@ For more information about this project, sse this [article](https://medium.com/@
 * Layer architecture
 * Domain Driven Design
 * Clean Code
-* Interface Segregation Principle
+* Interface Segregation Principle (S O L **I** D)
 
 ## News:
 **v1.1 --- 2020-06-24**
