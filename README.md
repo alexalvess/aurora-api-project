@@ -1,3 +1,5 @@
+![Aurora Project](https://repository-images.githubusercontent.com/128673011/f6ebdd80-b6da-11ea-94bb-9d141944b257)
+
 # What is Aurora project?
 It's an open source project, written in .NET Core, currently in version 3.1.
 
