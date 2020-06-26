@@ -36,7 +36,6 @@ For more information about this project, sse this [article](https://medium.com/@
 * Layer architecture
 * Domain Driven Design
 * Clean Code
-* Interface Segregation Principle
 * Dependency Inversion Principle (S O L I **D**)
 * Interface Segregation Principle (S O L **I** D)
 
