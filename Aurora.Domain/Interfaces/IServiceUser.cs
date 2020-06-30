@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
-using Aurora.Domain.Entities;
+using Aurora.Domain.Models;
 
 namespace Aurora.Domain.Interfaces
 {
     public interface IServiceUser
     {
-        User Insert(User obj);
+        UserModel Insert(CreateUserModel userModel);
 
-        User Update(User obj);
+        UserModel Update(int id, UpdateUserModel userModel);
 
         void Delete(int id);
 
-        User RecoverById(int id);
+        UserModel RecoverById(int id);
 
-        IList<User> Browse();
+        IEnumerable<UserModel> RecoverAll();
     }
 }
