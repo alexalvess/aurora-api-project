@@ -1,11 +1,11 @@
 ﻿using System;
-using Aurora.Domain.Entities;
 using Aurora.Domain.Interfaces;
+using Aurora.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aurora.Application.Controllers
 {
-    [Route("api/user")]
+    [Route("api/users")]
     [ApiController]
     public class UserController : Controller
     {
@@ -16,17 +16,13 @@ namespace Aurora.Application.Controllers
 
 
         [HttpPost]
-        public IActionResult Register([FromBody] User item)
+        public IActionResult Register([FromBody] CreateUserModel userModel)
         {
             try
             {
-                _serviceUser.Insert(item);
+                var user = _serviceUser.Insert(userModel);
 
-                return Ok(item.Id);
-            }
-            catch (ArgumentNullException ex)
-            {
-                return NotFound(ex);
+                return Ok(user?.Id);
             }
             catch (Exception ex)
             {
@@ -34,18 +30,14 @@ namespace Aurora.Application.Controllers
             }
         }
 
-        [HttpPut]
-        public IActionResult Update([FromBody] User item)
+        [HttpPut("{id}")]
+        public IActionResult Update([FromRoute] int id, [FromBody] UpdateUserModel userModel)
         {
             try
             {
-                _serviceUser.Update(item);
+                var user = _serviceUser.Update(id, userModel);
 
-                return Ok(item);
-            }
-            catch (ArgumentNullException ex)
-            {
-                return NotFound(ex);
+                return Ok(user);
             }
             catch (Exception ex)
             {
@@ -62,10 +54,6 @@ namespace Aurora.Application.Controllers
 
                 return NoContent();
             }
-            catch (ArgumentException ex)
-            {
-                return NotFound(ex);
-            }
             catch (Exception ex)
             {
                 return BadRequest(ex);
@@ -77,7 +65,8 @@ namespace Aurora.Application.Controllers
         {
             try
             {
-                return Ok(_serviceUser.Browse());
+                var users = _serviceUser.RecoverAll();
+                return Ok(users);
             }
             catch (Exception ex)
             {
@@ -90,11 +79,8 @@ namespace Aurora.Application.Controllers
         {
             try
             {
-                return Ok(_serviceUser.RecoverById(id));
-            }
-            catch (ArgumentException ex)
-            {
-                return NotFound(ex);
+                var user = _serviceUser.RecoverById(id);
+                return Ok(user);
             }
             catch (Exception ex)
             {

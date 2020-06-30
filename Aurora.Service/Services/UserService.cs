@@ -1,49 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
-using Aurora.Domain.Entities;
+﻿using System.Collections.Generic;
 using Aurora.Domain.Interfaces;
-using Aurora.Service.Validators;
-using FluentValidation;
+using Aurora.Domain.Models;
+using Flunt.Validations;
+using Infra.Shared.Contexts;
+using Infra.Shared.Mapper;
 
 namespace Aurora.Service.Services
 {
     public class UserService : IServiceUser
     {
         private readonly IRepositoryUser _repositoryUser;
+        private readonly NotificationContext _notificationContext;
 
-        public UserService(IRepositoryUser repositoryUser) =>
+        public UserService(IRepositoryUser repositoryUser, NotificationContext notificationContext)
+        {
             _repositoryUser = repositoryUser;
+            _notificationContext = notificationContext;
+        }
 
-        public IList<User> Browse() =>
-            _repositoryUser.GetAll();
+        public IEnumerable<UserModel> RecoverAll()
+        {
+            var users = _repositoryUser.GetAll();
+            return users.ConvertToUsers();
+        }
+
+        public UserModel RecoverById(int id)
+        {
+            var user = _repositoryUser.GetById(id);
+            return user.ConvertToUser();
+        }
 
         public void Delete(int id) =>
             _repositoryUser.Remove(id);
 
-        public User Insert(User obj)
+        public UserModel Insert(CreateUserModel userModel)
         {
-            Validate(obj, new UserValidator());
-            _repositoryUser.Save(obj);
-            return obj;
+            var user = userModel.ConvertToUserEntity();
+            _notificationContext.AddNotifications(user.Notifications);
+
+            if (_notificationContext.Invalid)
+                return default;
+
+            _repositoryUser.Save(user);
+            return user.ConvertToUser();
         }
 
-        public User RecoverById(int id) =>
-            _repositoryUser.GetById(id);
 
-        public User Update(User obj)
+        public UserModel Update(int id, UpdateUserModel userModel)
         {
-            Validate(obj, new UserValidator());
-            _repositoryUser.Save(obj);
-            return obj;
-            throw new NotImplementedException();
-        }
+            if (id != userModel.Id)
+            {
+                _notificationContext.AddNotifications(
+                    new Contract().AreNotEquals(id, userModel.Id, nameof(id), "User not found."));
 
-        private void Validate(User obj, UserValidator validator)
-        {
-            if (obj == null)
-                throw new Exception("User not found!");
+                if (_notificationContext.Invalid)
+                    return default;
+            }
 
-            validator.ValidateAndThrow(obj);
+            var user = userModel.ConvertToUserEntity();
+            _notificationContext.AddNotifications(user.Notifications);
+
+            if (_notificationContext.Invalid)
+                return default;
+
+            _repositoryUser.Save(user);
+            return user.ConvertToUser();
         }
     }
 }

@@ -10,8 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Aurora.Domain\Aurora.Domain.csproj" />
-    <ProjectReference Include="..\Aurora.Infra.Data\Aurora.Infra.Data.csproj" />
-    <ProjectReference Include="..\Infra.Shared\Infra.Shared.csproj" />
   </ItemGroup>
 
 </Project>

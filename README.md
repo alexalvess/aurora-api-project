@@ -26,20 +26,34 @@ For more information about this project, sse this [article](https://medium.com/@
 
 ## Technologies implemented:
 * ASP.NET Core 3.1 (com .NET Core 3.1)
-* Entity Framework Core 2.0.2
-* FluentValidation 7.5.2
+* Entity Framework Core 3.1.5
+* Flunt Validation 1.0.5
 * Swagger UI 5.5.0
 * MySql Database Connection
 * .NET Core Native DI
 
 ## Architecture:
 * Layer architecture
-* Domain Driven Design
+* Clean Architecture
+* S.O.L.I.D. principles
 * Clean Code
-* Dependency Inversion Principle (S O L I **D**)
-* Interface Segregation Principle (S O L **I** D)
+* Domain Validations
+* Domain Notifications
+* Domain Driven Design
+* CQS
+* Repository Pattern
+* Notification Pattern
+* Mapper by Extension Methods
 
 ## News:
+**v1.2 --- 2020-06-30**
+* Implemented Notification Pattern
+* Implemented Domain Validations and Notifications
+* Implemented CQS
+* Using Clean Architecture
+* Changed the framework validations to Flunt
+* Using mapper by extension methods
+
 **v1.1 --- 2020-06-24**
 * Updated the project name
 * Updated the project's SDK to .NET Core 3.1 version

@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation.AspNetCore" Version="7.5.2" />
+    <PackageReference Include="Flunt" Version="1.0.5" />
   </ItemGroup>
 
 </Project>

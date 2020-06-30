@@ -5,7 +5,7 @@ using Aurora.Infra.Data.Context;
 
 namespace Aurora.Infra.Data.Repository
 {
-    public class BaseRepository<T, B> where T : BaseEntity<B>
+    public class BaseRepository<TEntity, TKeyType> where TEntity : BaseEntity<TKeyType, TEntity>
     {
         protected readonly MySqlContext _mySqlContext;
 
@@ -14,13 +14,13 @@ namespace Aurora.Infra.Data.Repository
             _mySqlContext = mySqlContext;
         }
 
-        protected virtual void Insert(T obj)
+        protected virtual void Insert(TEntity obj)
         {
-            _mySqlContext.Set<T>().Add(obj);
+            _mySqlContext.Set<TEntity>().Add(obj);
             _mySqlContext.SaveChanges();
         }
 
-        protected virtual void Update(T obj)
+        protected virtual void Update(TEntity obj)
         {
             _mySqlContext.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _mySqlContext.SaveChanges();
@@ -28,14 +28,14 @@ namespace Aurora.Infra.Data.Repository
 
         protected virtual void Delete(int id)
         {
-            _mySqlContext.Set<T>().Remove(Select(id));
+            _mySqlContext.Set<TEntity>().Remove(Select(id));
             _mySqlContext.SaveChanges();
         }
 
-        protected virtual IList<T> Select() =>
-            _mySqlContext.Set<T>().ToList();
+        protected virtual IList<TEntity> Select() =>
+            _mySqlContext.Set<TEntity>().ToList();
 
-        protected virtual T Select(int id) =>
-            _mySqlContext.Set<T>().Find(id);
+        protected virtual TEntity Select(int id) =>
+            _mySqlContext.Set<TEntity>().Find(id);
     }
 }
