@@ -53,8 +53,7 @@ For more information about this project, sse this [article](https://medium.com/@
 **v1.2 --- 2020-06-30**
 * Implemented Notification Pattern
 * Implemented Domain Validations and Notifications
-* Implemented CQS
-* Using Clean Architecture
+* Using some concepts of Clean Architecture
 * Changed the framework validations to Flunt
 * Using mapper by extension methods
 
