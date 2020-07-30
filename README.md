@@ -44,8 +44,12 @@ For more information about this project, sse this [article](https://medium.com/@
 * Repository Pattern
 * Notification Pattern
 * Mapper by Extension Methods
+* Value Types
 
 ## News:
+**v1.3 --- 2020-07-30**
+* Changed Primitive Types to Value Types
+
 **v1.2 --- 2020-06-30**
 * Implemented Notification Pattern
 * Implemented Domain Validations and Notifications

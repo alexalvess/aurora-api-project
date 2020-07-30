@@ -47,11 +47,6 @@ namespace Aurora.Domain.Entities
             new Contract()
                 .IsLowerThan(new DateTime(1900, 12, 1), birthDate, nameof(birthDate), "You are very old.")
                 .IsGreaterThan(DateTime.Now.AddYears(-8), birthDate, nameof(birthDate), "You are very young.");
-
-        private Contract ValidateCpf(string cpf) =>
-            new Contract()
-                .IsNotNullOrWhiteSpace(cpf, nameof(cpf), "Is necessary to inform the CPF.")
-                .HasExactLengthIfNotNullOrEmpty(cpf, 11, nameof(cpf), "CPF should have 11 chars.");
     }
 }
 
