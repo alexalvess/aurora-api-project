@@ -40,7 +40,6 @@ For more information about this project, sse this [article](https://medium.com/@
 * Domain Validations
 * Domain Notifications
 * Domain Driven Design
-* CQS
 * Repository Pattern
 * Notification Pattern
 * Mapper by Extension Methods
@@ -54,6 +53,8 @@ For more information about this project, sse this [article](https://medium.com/@
 * Implemented Notification Pattern
 * Implemented Domain Validations and Notifications
 * Using some concepts of Clean Architecture
+    * Entities
+    * Interface Adapters
 * Changed the framework validations to Flunt
 * Using mapper by extension methods
 
