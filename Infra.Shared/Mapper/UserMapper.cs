@@ -14,9 +14,9 @@ namespace Infra.Shared.Mapper
             new User(userModel.Id, userModel.Name, userModel.BirthDate, userModel.Cpf);
 
         public static IEnumerable<UserModel> ConvertToUsers(this IList<User> users) =>
-            new List<UserModel>(users.Select(s => new UserModel(s.Id, s.Name, s.BirthDate, s.Cpf)));
+            new List<UserModel>(users.Select(s => new UserModel(s.Id, s.Name, s.BirthDate, s.Cpf.ToString())));
 
         public static UserModel ConvertToUser(this User user) =>
-            new UserModel(user.Id, user.Name, user.BirthDate, user.Cpf);
+            new UserModel(user.Id, user.Name, user.BirthDate, user.Cpf.ToString());
     }
 }

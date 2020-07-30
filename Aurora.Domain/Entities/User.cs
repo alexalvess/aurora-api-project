@@ -1,16 +1,17 @@
-﻿using System;
+﻿using Aurora.Domain.ValueTypes;
 using Flunt.Validations;
+using System;
 
 namespace Aurora.Domain.Entities
 {
     public class User : BaseEntity<int, User>
     {
-        public User(int id, string name, DateTime birthDate, string cpf) : base(id)
+        public User(int id, string name, DateTime birthDate, Cpf cpf) : base(id)
         {
             AddNotifications(
                 ValidateName(name),
                 ValidateBirthDate(birthDate),
-                ValidateCpf(cpf));
+                cpf.contract);
 
             if (Valid)
             {
@@ -24,7 +25,17 @@ namespace Aurora.Domain.Entities
 
         public DateTime BirthDate { get; protected set; }
 
-        public string Cpf { get; protected set; }
+        public Cpf Cpf { get; protected set; }
+
+        public int CalculateAge()
+        {
+            var age = DateTime.Now.Year - BirthDate.Year;
+
+            if (BirthDate.Date > DateTime.Now.AddDays(-age))
+                age--;
+
+            return age;
+        }
 
         private Contract ValidateName(string name) =>
             new Contract()
@@ -36,11 +47,6 @@ namespace Aurora.Domain.Entities
             new Contract()
                 .IsLowerThan(new DateTime(1900, 12, 1), birthDate, nameof(birthDate), "You are very old.")
                 .IsGreaterThan(DateTime.Now.AddYears(-8), birthDate, nameof(birthDate), "You are very young.");
-
-        private Contract ValidateCpf(string cpf) =>
-            new Contract()
-                .IsNotNullOrWhiteSpace(cpf, nameof(cpf), "Is necessary to inform the CPF.")
-                .HasExactLengthIfNotNullOrEmpty(cpf, 11, nameof(cpf), "CPF should have 11 chars.");
     }
 }
 
