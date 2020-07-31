@@ -5,9 +5,9 @@ using Aurora.Infra.Data.Context;
 
 namespace Aurora.Infra.Data.Repository
 {
-    public class UserRepository : BaseRepository<User, int>, IRepositoryUser
+    public class WorkerRepository : BaseRepository<Worker, int>, IRepositoryWorker
     {
-        public UserRepository(MySqlContext mySqlContext) : base(mySqlContext)
+        public WorkerRepository(MySqlContext mySqlContext) : base(mySqlContext)
         {
         }
 
@@ -15,7 +15,7 @@ namespace Aurora.Infra.Data.Repository
             base.Delete(id);
 
 
-        public void Save(User obj)
+        public void Save(Worker obj)
         {
             if (obj.Id == 0)
                 base.Insert(obj);
@@ -23,10 +23,10 @@ namespace Aurora.Infra.Data.Repository
                 base.Update(obj);
         }
 
-        public User GetById(int id) =>
+        public Worker GetById(int id) =>
             base.Select(id);
 
-        public IList<User> GetAll() =>
+        public IList<Worker> GetAll() =>
             base.Select();
 
     }

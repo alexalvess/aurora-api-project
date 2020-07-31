@@ -7,24 +7,24 @@ using Infra.Shared.Mapper;
 
 namespace Aurora.Service.Services
 {
-    public class UserService : IServiceUser
+    public class WorkerService : IServiceWorker
     {
-        private readonly IRepositoryUser _repositoryUser;
+        private readonly IRepositoryWorker _repositoryUser;
         private readonly NotificationContext _notificationContext;
 
-        public UserService(IRepositoryUser repositoryUser, NotificationContext notificationContext)
+        public WorkerService(IRepositoryWorker repositoryUser, NotificationContext notificationContext)
         {
             _repositoryUser = repositoryUser;
             _notificationContext = notificationContext;
         }
 
-        public IEnumerable<UserModel> RecoverAll()
+        public IEnumerable<WorkerModel> RecoverAll()
         {
             var users = _repositoryUser.GetAll();
             return users.ConvertToUsers();
         }
 
-        public UserModel RecoverById(int id)
+        public WorkerModel RecoverById(int id)
         {
             var user = _repositoryUser.GetById(id);
             return user.ConvertToUser();
@@ -33,7 +33,7 @@ namespace Aurora.Service.Services
         public void Delete(int id) =>
             _repositoryUser.Remove(id);
 
-        public UserModel Insert(CreateUserModel userModel)
+        public WorkerModel Insert(CreateWorkerModel userModel)
         {
             var user = userModel.ConvertToUserEntity();
             _notificationContext.AddNotifications(user.Notifications);
@@ -46,15 +46,13 @@ namespace Aurora.Service.Services
         }
 
 
-        public UserModel Update(int id, UpdateUserModel userModel)
+        public WorkerModel Update(int id, UpdateWorkerModel userModel)
         {
             if (id != userModel.Id)
             {
-                _notificationContext.AddNotifications(
-                    new Contract().AreNotEquals(id, userModel.Id, nameof(id), "User not found."));
+                _notificationContext.AddNotifications(new Contract().AreNotEquals(id, userModel.Id, nameof(id), "User not found."));
 
-                if (_notificationContext.Invalid)
-                    return default;
+                return default;
             }
 
             var user = userModel.ConvertToUserEntity();

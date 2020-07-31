@@ -2,29 +2,29 @@
 
 namespace Aurora.Domain.ValueTypes
 {
-    public struct Cpf
+    public struct Nin
     {
         private readonly string _value;
         public readonly Contract contract;
 
-        private Cpf(string value)
+        private Nin(string value)
         {
             _value = value;
             contract = new Contract();
-            Validate(_value);
+            Validate();
         }
 
         public override string ToString() =>
             _value;
 
-        public static implicit operator Cpf(string input) =>
-            new Cpf(input);
+        public static implicit operator Nin(string input) =>
+            new Nin(input);
 
-        private void Validate(string value)
+        private void Validate()
         {
-            if (string.IsNullOrWhiteSpace(value))
+            if (string.IsNullOrWhiteSpace(_value))
             {
-                contract.AddNotification(nameof(Cpf), "Is necessary to inform the CPF.");
+                contract.AddNotification(nameof(Nin), "Is necessary to inform the CPF.");
                 return;
             }
 
@@ -34,12 +34,12 @@ namespace Aurora.Domain.ValueTypes
             string digit;
             int sum, rest;
 
-            value = value.Trim();
-            value = value.Replace(".", "").Replace("-", "");
+            var value = _value.Trim();
+            value = _value.Replace(".", "").Replace("-", "");
 
             if (value.Length != 11)
             {
-                contract.AddNotification(nameof(Cpf), "CPF should have 11 chars.");
+                contract.AddNotification(nameof(Nin), "CPF should have 11 chars.");
                 return;
             }
 
@@ -73,7 +73,7 @@ namespace Aurora.Domain.ValueTypes
             digit = digit + rest.ToString();
 
             if (!value.EndsWith(digit))
-                contract.AddNotification(nameof(Cpf), "This CPF is invalid.");
+                contract.AddNotification(nameof(Nin), "This CPF is invalid.");
         }
     }
 }

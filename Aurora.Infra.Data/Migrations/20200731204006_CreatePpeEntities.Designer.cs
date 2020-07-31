@@ -3,14 +3,16 @@ using System;
 using Aurora.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Aurora.Infra.Data.Migrations
 {
     [DbContext(typeof(MySqlContext))]
-    partial class MySqlContextModelSnapshot : ModelSnapshot
+    [Migration("20200731204006_CreatePpeEntities")]
+    partial class CreatePpeEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,20 +87,10 @@ namespace Aurora.Infra.Data.Migrations
                     b.Property<DateTime>("DeliveryDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("PersonalProtectiveEquipmentId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("ReturnDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("WorkerId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PersonalProtectiveEquipmentId");
-
-                    b.HasIndex("WorkerId");
 
                     b.ToTable("PersonalProtectiveEquipmentPossession");
                 });
@@ -131,21 +123,6 @@ namespace Aurora.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Worker");
-                });
-
-            modelBuilder.Entity("Aurora.Domain.Entities.PpePossession", b =>
-                {
-                    b.HasOne("Aurora.Domain.Entities.PersonalProtectiveEquipment", "PersonalProtectiveEquipment")
-                        .WithMany("PpePossessions")
-                        .HasForeignKey("PersonalProtectiveEquipmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Aurora.Domain.Entities.Worker", "Worker")
-                        .WithMany("PpePossessions")
-                        .HasForeignKey("WorkerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

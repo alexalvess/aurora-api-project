@@ -3,15 +3,15 @@ using Aurora.Domain.Entities;
 
 namespace Aurora.Domain.Interfaces
 {
-    public interface IRepositoryUser
+    public interface IRepositoryWorker
     {
-        void Save(User obj);
+        void Save(Worker obj);
 
         void Remove(int id);
 
-        User GetById(int id);
+        Worker GetById(int id);
 
-        IList<User> GetAll();
+        IList<Worker> GetAll();
     }
 }
 

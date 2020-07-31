@@ -7,16 +7,16 @@ namespace Aurora.Application.Controllers
 {
     [Route("api/users")]
     [ApiController]
-    public class UserController : Controller
+    public class WorkerController : Controller
     {
-        private readonly IServiceUser _serviceUser;
+        private readonly IServiceWorker _serviceUser;
 
-        public UserController(IServiceUser serviceUser) =>
+        public WorkerController(IServiceWorker serviceUser) =>
             _serviceUser = serviceUser;
 
 
         [HttpPost]
-        public IActionResult Register([FromBody] CreateUserModel userModel)
+        public IActionResult Register([FromBody] CreateWorkerModel userModel)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace Aurora.Application.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update([FromRoute] int id, [FromBody] UpdateUserModel userModel)
+        public IActionResult Update([FromRoute] int id, [FromBody] UpdateWorkerModel userModel)
         {
             try
             {

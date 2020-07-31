@@ -2,9 +2,9 @@
 
 namespace Aurora.Domain.Models
 {
-    public class UserModel
+    public class WorkerModel
     {
-        public UserModel(int id, string name, DateTime birthDate, string cpf)
+        public WorkerModel(int id, string name, DateTime birthDate, string cpf)
         {
             Id = id;
             Name = name;
