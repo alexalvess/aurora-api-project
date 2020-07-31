@@ -2,14 +2,14 @@
 
 namespace Aurora.Domain.Models
 {
-    public class UpdateUserModel
+    public class CreateWorkerModel
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public DateTime BirthDate { get; set; }
 
         public string Cpf { get; set; }
+
+        public string Password { get; set; }
     }
 }

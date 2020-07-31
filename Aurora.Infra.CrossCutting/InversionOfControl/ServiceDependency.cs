@@ -8,7 +8,7 @@ namespace Aurora.Infra.CrossCutting.InversionOfControl
     {
         public static void AddServiceDependency(this IServiceCollection services)
         {
-            services.AddScoped<IServiceUser, UserService>();
+            services.AddScoped<IServiceWorker, WorkerService>();
         }
     }
 }

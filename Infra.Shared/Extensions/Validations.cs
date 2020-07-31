@@ -19,7 +19,7 @@ namespace Infra.Shared.Extensions
 
             if (value.Length != 11)
             {
-                contract.AddNotification(nameof(Cpf), "This CPF is invalid.");
+                contract.AddNotification(nameof(Nin), "This CPF is invalid.");
                 return contract;
             }
 
@@ -53,7 +53,7 @@ namespace Infra.Shared.Extensions
             digit = digit + rest.ToString();
 
             if (!value.EndsWith(digit))
-                contract.AddNotification(nameof(Cpf), "This CPF is invalid.");
+                contract.AddNotification(nameof(Nin), "This CPF is invalid.");
 
             return contract;
         }

@@ -5,7 +5,7 @@ using Aurora.Infra.Data.Context;
 
 namespace Aurora.Infra.Data.Repository
 {
-    public class BaseRepository<TEntity, TKeyType> where TEntity : BaseEntity<TKeyType, TEntity>
+    public class BaseRepository<TEntity, TKeyType> where TEntity : BaseEntity<TKeyType>
     {
         protected readonly MySqlContext _mySqlContext;
 

@@ -5,6 +5,13 @@ It's an open source project, written in .NET Core, currently in version 3.1.
 
 The project's goals is to show that is possible to create an architecture more simple than others and using some concepts like DDD (Design Driven Design).
 
+## Business proposal:
+This project is a simple PPE (Personal Protective Equipament) Management. The principle idea is to register workers and PPE and, with this data, allow to transfer PPE to a worker.
+Besides that, this system allow that you see all PPE and who has a PPE and notify if the PPE is near to expire.
+
+### Abbreviations:
+* NIN: National Insurance Number (as CPF in Brazil)
+
 ## How to use:
 1. Clone this project to into your machine
 2. Use the default connection string or:
@@ -47,7 +54,8 @@ For more information about this project, sse this [article](https://medium.com/@
 
 ## News:
 **v1.3 --- 2020-07-30**
-* Changed Primitive Types to Value Types
+* Changed some Primitive Types to Value Types
+* Changed the business idea principle
 
 **v1.2 --- 2020-06-30**
 * Implemented Notification Pattern
