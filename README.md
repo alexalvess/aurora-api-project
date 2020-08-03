@@ -41,7 +41,6 @@ For more information about this project, sse this [article](https://medium.com/@
 
 ## Architecture:
 * Layer architecture
-* Clean Architecture
 * S.O.L.I.D. principles
 * Clean Code
 * Domain Validations
