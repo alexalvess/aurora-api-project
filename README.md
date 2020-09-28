@@ -38,6 +38,7 @@ For more information about this project, sse this [article](https://medium.com/@
 * Swagger UI 5.5.0
 * MySql Database Connection
 * .NET Core Native DI
+* SpecFlow for BDD
 
 ## Architecture:
 * Layer architecture
@@ -50,8 +51,15 @@ For more information about this project, sse this [article](https://medium.com/@
 * Notification Pattern
 * Mapper by Extension Methods
 * Value Types
+* BDD (Behavior Driven Development)
 
 ## News:
+**v1.4 --- 2020-09-28**
+* Include integration tests using BDD with SpecFlow
+    * scenario of register a worker
+    * scenario of update a worker
+* Bug corrections
+
 **v1.3 --- 2020-07-30**
 * Changed some Primitive Types to Value Types
 * Changed the business idea principle

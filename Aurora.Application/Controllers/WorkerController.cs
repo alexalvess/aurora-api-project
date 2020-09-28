@@ -22,7 +22,7 @@ namespace Aurora.Application.Controllers
             {
                 var user = _serviceUser.Insert(userModel);
 
-                return Ok(user?.Id);
+                return Created($"/api/users/{user?.Id}", user?.Id);
             }
             catch (Exception ex)
             {
@@ -37,7 +37,7 @@ namespace Aurora.Application.Controllers
             {
                 var user = _serviceUser.Update(id, userModel);
 
-                return Ok(user);
+                return NoContent();
             }
             catch (Exception ex)
             {
