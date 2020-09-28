@@ -20,7 +20,7 @@ namespace Aurora.Infra.Data.Repository
             if (obj.Id == 0)
                 base.Insert(obj);
             else
-                base.Update(obj);
+                base.Update(obj, _mySqlContext.Entry(obj).Property(prop => prop.Password));
         }
 
         public Worker GetById(int id) =>

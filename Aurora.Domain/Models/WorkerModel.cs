@@ -9,7 +9,7 @@ namespace Aurora.Domain.Models
             Id = id;
             Name = name;
             BirthDate = birthDate;
-            Cpf = cpf;
+            Nin = cpf;
         }
 
         public int Id { get; set; }
@@ -18,6 +18,6 @@ namespace Aurora.Domain.Models
 
         public DateTime BirthDate { get; set; }
 
-        public string Cpf { get; set; }
+        public string Nin { get; set; }
     }
 }

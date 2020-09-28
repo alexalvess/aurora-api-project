@@ -17,7 +17,11 @@ namespace Aurora.Infra.CrossCutting.InversionOfControl
                 var username = configuration["database:mysql:username"];
                 var password = configuration["database:mysql:password"];
 
-                options.UseMySql($"Server={server};Port={port};Database={database};Uid={username};Pwd={password}");
+                options.UseMySql($"Server={server};Port={port};Database={database};Uid={username};Pwd={password}", opt =>
+                {
+                    opt.CommandTimeout(180);
+                    opt.EnableRetryOnFailure(5);
+                });
             });
         }
     }

@@ -2,6 +2,7 @@
 using System.Linq;
 using Aurora.Domain.Entities;
 using Aurora.Infra.Data.Context;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Aurora.Infra.Data.Repository
 {
@@ -23,6 +24,16 @@ namespace Aurora.Infra.Data.Repository
         protected virtual void Update(TEntity obj)
         {
             _mySqlContext.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _mySqlContext.SaveChanges();
+        }
+
+        protected virtual void Update<TProperty>(TEntity obj, params PropertyEntry<TEntity, TProperty>[] propsToIgnore)
+        {
+            _mySqlContext.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+            foreach (var item in propsToIgnore)
+                item.IsModified = false;
+
             _mySqlContext.SaveChanges();
         }
 

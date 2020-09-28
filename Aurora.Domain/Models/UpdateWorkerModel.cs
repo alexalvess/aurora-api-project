@@ -10,6 +10,6 @@ namespace Aurora.Domain.Models
 
         public DateTime BirthDate { get; set; }
 
-        public string Cpf { get; set; }
+        public string Nin { get; set; }
     }
 }
