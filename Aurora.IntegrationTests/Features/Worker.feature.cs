@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Aurora.IntegrationTests.UseCases.Worker
+namespace Aurora.IntegrationTests.Features
 {
     using TechTalk.SpecFlow;
     using System;
@@ -40,7 +40,7 @@ namespace Aurora.IntegrationTests.UseCases.Worker
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "UseCases/Worker", "Worker", "\tThe worker exists to map who work in the company and who have a PPE", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Worker", "\tThe worker exists to map who work in the company and who have a PPE", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -110,17 +110,23 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "BirthDate",
+                            "Nin",
+                            "Password"});
+                table1.AddRow(new string[] {
+                            "James Willian",
+                            "1998-02-15",
+                            "49638618019",
+                            "123456"});
+                table1.AddRow(new string[] {
+                            "James Willian",
+                            "1300-02-15",
+                            "49638618019",
+                            "123456"});
 #line 6
- testRunner.Given("the worker which the name is \'James Willian\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 7
- testRunner.And("the bith date is \'1998-02-15\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 8
- testRunner.And("the NIN is \'49638618019\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 9
- testRunner.And("the Password is \'123456\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("the worker\'s data:", ((string)(null)), table1, "Given ");
 #line hidden
 #line 10
  testRunner.When("the register is done", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");

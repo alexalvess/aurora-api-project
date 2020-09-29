@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Aurora.IntegrationTests.Configurations
+namespace Aurora.IntegrationTests.Drivers
 {
     public static class ServerSetup
     {

@@ -38,7 +38,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Shared", "Infra.Share
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{5CC16B47-9050-4A7D-977B-9C53756B09EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aurora.IntegrationTests", "Aurora.IntegrationTests\Aurora.IntegrationTests.csproj", "{7DE45DAE-DB07-48FB-846F-8F4F46C3AE1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aurora.IntegrationTests", "Aurora.IntegrationTests\Aurora.IntegrationTests.csproj", "{7DE45DAE-DB07-48FB-846F-8F4F46C3AE1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

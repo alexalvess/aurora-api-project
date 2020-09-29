@@ -1,26 +1,25 @@
-﻿using Aurora.Application;
-using Aurora.Domain.Interfaces;
-using Aurora.Domain.Models;
-using Aurora.IntegrationTests.Configurations;
-using Microsoft.AspNetCore.Hosting;
+﻿using Aurora.Domain.Models;
+using Aurora.IntegrationTests.Drivers;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 using Xunit;
 
-namespace Aurora.IntegrationTests.UseCases.Worker
+namespace Aurora.IntegrationTests.Steps
 {
-    [Binding]
+    [Binding, Scope(Tag = "registerWorker")]
     public class RegisterWorkerSteps
     {
         private readonly TestServer _server;
         private readonly HttpClient _client;
-        private readonly CreateWorkerModel _createWorkerModel;
+        private CreateWorkerModel _createWorkerModel;
         private WorkerModel _workerModel;
         private int _workerId;
 
@@ -28,36 +27,20 @@ namespace Aurora.IntegrationTests.UseCases.Worker
         {
             _server = ServerSetup.Setup();
             _client = _server.CreateClient();
-            _createWorkerModel = new CreateWorkerModel();
         }
 
-        [Given(@"the worker which the name is '(.*)'")]
-        public void GivenTheWorkerWhichTheNameIs(string name) =>
-            _createWorkerModel.Name = name;
+        [Given(@"the worker's data:")]
+        public void GivenTheWorkersData(Table table) =>
+            _createWorkerModel = table.CreateInstance<CreateWorkerModel>();
 
-        [Given(@"the bith date is '(.*)'")]
-        public void GivenTheBithDateIs(string birthDate) =>
-            _createWorkerModel.BirthDate = Convert.ToDateTime(birthDate);
-
-        [Given(@"the NIN is '(.*)'")]
-        public void GivenTheNINIs(string nin) =>
-            _createWorkerModel.Nin = nin;
-
-        [Given(@"the Password is '(.*)'")]
-        public void GivenThePasswordIs(string password) =>
-            _createWorkerModel.Password = password;
-        
         [When(@"the register is done")]
         public async Task WhenTheRegisterIsDone()
         {
             try
             {
-                var temp = (IRepositoryWorker)_server.Services.GetService(typeof(IRepositoryWorker));
-                
-
                 var data = JsonConvert.SerializeObject(_createWorkerModel);
                 var stringContent = new StringContent(data, Encoding.UTF8, "application/json");
-                
+
                 var response = await _client.PostAsync("api/users", stringContent);
 
                 Assert.Equal(HttpStatusCode.Created, response.StatusCode);
@@ -81,12 +64,10 @@ namespace Aurora.IntegrationTests.UseCases.Worker
             var result = await response.Content.ReadAsStringAsync();
             _workerModel = JsonConvert.DeserializeObject<WorkerModel>(result);
         }
-        
+
         [Then(@"the worker exists, returned, on the database")]
         public void ThenTheIdExistsReturnedOnTheDatabase()
         {
-            
-
             Assert.Equal(_createWorkerModel.Name, _workerModel.Name);
             Assert.Equal(_createWorkerModel.BirthDate, _workerModel.BirthDate);
             Assert.Equal(_createWorkerModel.Nin, _workerModel.Nin);

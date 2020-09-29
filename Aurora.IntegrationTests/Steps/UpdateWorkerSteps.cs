@@ -1,57 +1,45 @@
 ﻿using Aurora.Domain.Interfaces;
 using Aurora.Domain.Models;
-using Aurora.IntegrationTests.Configurations;
+using Aurora.IntegrationTests.Drivers;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 using Xunit;
 
-namespace Aurora.IntegrationTests.UseCases.Worker
+namespace Aurora.IntegrationTests.Steps
 {
-    [Binding]
+    [Binding, Scope(Tag = "updateWorker")]
     public class UpdateWorkerSteps
     {
         private readonly TestServer _server;
         private readonly HttpClient _client;
         private readonly IServiceWorker _serviceWorker;
-        private readonly CreateWorkerModel _createWorkerModel;
+        private CreateWorkerModel _createWorkerModel;
         private WorkerModel _existsWorkerModel;
         private WorkerModel _recoverWorkerModel;
-        private int _workerId;
 
         public UpdateWorkerSteps()
         {
             _server = ServerSetup.Setup();
             _client = _server.CreateClient();
             _serviceWorker = (IServiceWorker)_server.Services.GetService(typeof(IServiceWorker));
-            _createWorkerModel = new CreateWorkerModel();
         }
 
-        [Given(@"an worker called '(.*)'")]
-        public void GivenAnExistsWorkerCalled(string name) =>
-            _createWorkerModel.Name = name;
+        [Given(@"an worker's data:")]
+        public void GivenAnWorkersData(Table table) =>
+            _createWorkerModel = table.CreateInstance<CreateWorkerModel>();
 
-        [Given(@"his birth date is '(.*)'")]
-        public void GivenHisBirthDateIs(string birthDate) =>
-            _createWorkerModel.BirthDate = Convert.ToDateTime(birthDate);
-
-        [Given(@"his Password is '(.*)'")]
-        public void GivenHisPasswordIs(string password) =>
-            _createWorkerModel.Password = password;
-
-        [Given(@"his Nin is '(.*)'")]
-        public void GivenHisNinIs(string nin) =>
-            _createWorkerModel.Nin = nin;
-
-        [Then(@"i insert this woker on database")]
+                [Then(@"i insert this woker on database")]
         public void ThenIInsertThisWorkOnDatabase() =>
             _existsWorkerModel = _serviceWorker.Insert(_createWorkerModel);
-        
+
         [When(@"i update this worker's name to '(.*)'")]
         public async Task WhenIUpdateThisWorkerSName(string name)
         {
@@ -79,7 +67,7 @@ namespace Aurora.IntegrationTests.UseCases.Worker
                 Assert.True(false, ex.Message);
             }
         }
-        
+
         [When(@"i update this worker's nin to '(.*)'")]
         public async Task WhenIUpdateThisWorkerSNin(string nin)
         {
@@ -107,7 +95,7 @@ namespace Aurora.IntegrationTests.UseCases.Worker
                 Assert.True(false, ex.Message);
             }
         }
-        
+
         [Then(@"i recover this worker")]
         public async Task ThenIRecoverThisWorker()
         {
@@ -125,17 +113,13 @@ namespace Aurora.IntegrationTests.UseCases.Worker
                 Assert.True(false, ex.Message);
             }
         }
-        
+
         [Then(@"verify the worker's name")]
-        public void ThenVerifyTheWorkerSName()
-        {
+        public void ThenVerifyTheWorkerSName() =>
             Assert.Equal(_existsWorkerModel.Name, _recoverWorkerModel.Name);
-        }
-        
+
         [Then(@"verify the worker's nin")]
-        public void ThenVerifyTheWorkerSNin()
-        {
+        public void ThenVerifyTheWorkerSNin() =>
             Assert.Equal(_existsWorkerModel.Nin, _recoverWorkerModel.Nin);
-        }
     }
 }
