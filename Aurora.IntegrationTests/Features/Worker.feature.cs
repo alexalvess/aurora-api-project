@@ -120,21 +120,16 @@ this.ScenarioInitialize(scenarioInfo);
                             "1998-02-15",
                             "49638618019",
                             "123456"});
-                table1.AddRow(new string[] {
-                            "James Willian",
-                            "1300-02-15",
-                            "49638618019",
-                            "123456"});
 #line 6
  testRunner.Given("the worker\'s data:", ((string)(null)), table1, "Given ");
 #line hidden
-#line 10
+#line 9
  testRunner.When("the register is done", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 11
+#line 10
  testRunner.And("i recover the worker by id", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 12
+#line 11
  testRunner.Then("the worker exists, returned, on the database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -151,7 +146,7 @@ this.ScenarioInitialize(scenarioInfo);
                     "updateWorker"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update a worker", null, tagsOfScenario, argumentsOfScenario);
-#line 15
+#line 14
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -171,34 +166,35 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 16
- testRunner.Given("an worker called \'Alexander Jeffrey\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 17
- testRunner.And("his birth date is \'2000-06-09\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "BirthDate",
+                            "Nin",
+                            "Password"});
+                table2.AddRow(new string[] {
+                            "Alexander Jeffrey",
+                            "2000-06-09",
+                            "38484649008",
+                            "123456"});
+#line 15
+ testRunner.Given("an worker\'s data:", ((string)(null)), table2, "Given ");
 #line hidden
 #line 18
- testRunner.And("his Nin is \'38484649008\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 19
- testRunner.And("his Password is \'123456\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 20
  testRunner.Then("i insert this woker on database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 21
+#line 19
  testRunner.When("i update this worker\'s name to \'Josef Carlos\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 22
+#line 20
  testRunner.And("i update this worker\'s nin to \'08396661014\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 23
+#line 21
  testRunner.Then("i recover this worker", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 24
+#line 22
  testRunner.And("verify the worker\'s name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 25
+#line 23
  testRunner.And("verify the worker\'s nin", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }

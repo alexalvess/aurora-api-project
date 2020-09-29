@@ -15,7 +15,7 @@ namespace Aurora.IntegrationTests.Drivers
             var webHost = new WebHostBuilder().UseStartup<Startup>();
 
             var configurations = new ConfigurationBuilder()
-                .AddJsonFile("appSettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables()
                 .Build();
 
