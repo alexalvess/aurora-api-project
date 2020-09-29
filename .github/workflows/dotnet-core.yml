@@ -34,7 +34,7 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
       
     - name: Publish
-      run: dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
+      run: dotnet publish -c Release -o '${{ env.DOTNET_ROOT }}/myapp'
     
     - name: Deploy
       uses: azure/webapps-deploy@v2
