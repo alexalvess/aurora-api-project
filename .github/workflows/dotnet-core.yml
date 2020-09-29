@@ -9,8 +9,7 @@ on:
       - '*'
 
 env:
-  AZURE_WEBAPP_NAME: aurora-project
-  AZURE_WEBAPP_PACKAGE_PATH: 'aurora-project.azurewebsites.net'
+  AZURE_WEBAPP_NAME: "aurora-project"
   DOTNET_VERSION: '3.1.301'
 
 jobs:
@@ -28,18 +27,23 @@ jobs:
       run: dotnet restore
     
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration Release
     
     - name: Test
       run: dotnet test --no-restore --verbosity normal
       
     - name: Publish
       run: dotnet publish -c Release -o ${{ env.DOTNET_ROOT }}/myapp
+      
+    - name: Azure Login
+      uses: azure/login@v1.1
+      with:
+        creds: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
     
     - name: Deploy
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }} 
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        slot-name: "production"
         package: ${{ env.DOTNET_ROOT }}/myapp
     
