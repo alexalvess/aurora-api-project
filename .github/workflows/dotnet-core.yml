@@ -10,7 +10,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: 'aurora-project'
-  DOTNET_VERSION: '3.1.301'
+  DOTNET_VERSION: '3.1.5'
 
 jobs:
   build-and-deploy:
