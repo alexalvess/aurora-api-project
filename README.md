@@ -39,6 +39,7 @@ For more information about this project, sse this [article](https://medium.com/@
 * MySql Database Connection
 * .NET Core Native DI
 * SpecFlow for BDD
+* GitHub Actions
 
 ## Architecture:
 * Layer architecture
@@ -55,6 +56,7 @@ For more information about this project, sse this [article](https://medium.com/@
 
 ## News:
 **v1.4 --- 2020-09-28**
+* CI/CD by GitHub Actions
 * Include integration tests using BDD with SpecFlow
     * scenario of register a worker
     * scenario of update a worker
