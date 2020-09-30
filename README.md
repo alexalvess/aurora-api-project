@@ -54,6 +54,8 @@ For more information about this project, sse this [article](https://medium.com/@
 * Value Types
 * BDD (Behavior Driven Development)
 
+![Architecture](https://miro.medium.com/max/962/1*qpHCIA7RDfW89KtSUXGJog.png)
+
 ## News:
 **v1.4 --- 2020-09-28**
 * CI/CD by GitHub Actions
