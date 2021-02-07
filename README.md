@@ -3,11 +3,11 @@
 # What is Aurora project?
 It's an open source project, written in .NET Core, currently in version 3.1.
 
-The project's goals is to show that it is possible to create an architecture more simple than others and using some concepts like DDD (Design Driven Design).
+The project's goal is to show that it is possible to create an architecture more simple than others and using some concepts like DDD (Domain-driven Design).
 
 ## Business proposal:
-This project is a simple PPE (Personal Protective Equipament) Management. The principle idea is to register workers and PPE and, with this data, allow to transfer PPE to a worker.
-Besides that, this system allow that you see all PPE and who has a PPE and notify if the PPE is near to expire.
+This project is a simple PPE (Personal Protective Equipment) Management. The principle idea is to register workers and PPE and, with this data, allow to transfer PPE to a worker.
+Besides that, this system allows that you see all the PPE and who has a PPE and notify if the PPE is near to expire.
 
 ### Abbreviations:
 * NIN: National Insurance Number (as CPF in Brazil)
