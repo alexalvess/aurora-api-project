@@ -1,0 +1,34 @@
+<Project>
+
+  <PropertyGroup Label="Common properties">
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>10</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Packages dependency versions">
+
+    <!--Microsoft-->
+    <Microsoft_Extensions_Version>6.0.0</Microsoft_Extensions_Version>
+
+    <!--EF Core-->
+    <EntityFrameworkCore_Version>6.0.0</EntityFrameworkCore_Version>
+
+    <!--Serilog-->
+    <Serilog_AspNet_Version>4.1.0</Serilog_AspNet_Version>
+    <Serilog_Version>2.10.0</Serilog_Version>
+	<Serilog_Formatting_Version>8.4.1</Serilog_Formatting_Version>
+
+    <!--Masstransit-->
+    <Masstransit_Version>7.2.4</Masstransit_Version>
+
+    <!--Others-->
+    <FluentValidation_Version>10.3.3</FluentValidation_Version>
+    <Scrutor_Version>3.3.0</Scrutor_Version>
+    <Newtonsoft_Version>13.0.1</Newtonsoft_Version>
+    <OfferMessageContract_Version>1194397.0.0-beta</OfferMessageContract_Version>
+    <JsonNet_ContractResolvers_Version>2.0.0</JsonNet_ContractResolvers_Version>
+    <MongoDB_Driver_Version>2.13.1</MongoDB_Driver_Version>
+	
+  </PropertyGroup>
+
+</Project>
