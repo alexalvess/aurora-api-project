@@ -1,9 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="Migrations\20200731175900_ChangeUserToWorker.cs" />
     <Compile Remove="Migrations\20200731175900_ChangeUserToWorker.Designer.cs" />

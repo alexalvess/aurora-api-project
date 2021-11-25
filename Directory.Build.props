@@ -1,0 +1,13 @@
+<Project>
+
+  <PropertyGroup Label="Common properties">
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>10</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Packages dependency versions">
+	
+  
+  </PropertyGroup>
+
+</Project>
