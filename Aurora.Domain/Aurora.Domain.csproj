@@ -1,7 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-	<ItemGroup>
-    <PackageReference Include="Flunt" Version="1.0.5" />
-  </ItemGroup>
-
-</Project>

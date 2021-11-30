@@ -1,13 +1,17 @@
 <Project>
 
-  <PropertyGroup Label="Common properties">
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>10</LangVersion>
-  </PropertyGroup>
+	<PropertyGroup Label="Common properties">
+		<TargetFramework>net6.0</TargetFramework>
+		<LangVersion>10</LangVersion>
+	</PropertyGroup>
 
-  <PropertyGroup Label="Packages dependency versions">
-	
-  
-  </PropertyGroup>
+	<PropertyGroup Label="Packages dependency versions">
+		<!--Microsoft-->
+		<Microsoft_Extensions_Version>6.0.0</Microsoft_Extensions_Version>
+		
+		<!--Mongo DB-->
+		<MongoDB_Driver_Version>2.14.0</MongoDB_Driver_Version>
+
+	</PropertyGroup>
 
 </Project>
