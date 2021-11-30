@@ -3,7 +3,7 @@
 # What is Aurora project?
 It's an open source project, written in .NET, currently in version 6.
 
-The project's goal is to show that it is possible to create an architecture more simple than others and using some concepts like DDD (Domain-driven Design).
+The project's goal is to show how can we use the Hexagonal Architecture concepts and using some concepts like DDD to create an API.
 
 ## Business proposal:
 This project is a simple PPE Management. The principle idea is to register workers and PPE and, with this data, allow to transfer PPE to a worker.
@@ -12,12 +12,13 @@ Besides that, this system allows that you see all the PPE and who has a PPE and 
 ### Abbreviations:
 * NIN: National Insurance Number (as CPF in Brazil)
 * PPE: Personal Protective Equipment
+* DDD: Domain Driven Design
 
 ## How to use:
 1. Clone this project to into your machine
 2. Run MongoDB container (like on Docker)
     2.1. Inform the right connection string in project
-4. Finally, build and run the application
+3. Finally, build and run the application
 
 ## Technologies:
 * .NET 6
@@ -25,10 +26,8 @@ Besides that, this system allows that you see all the PPE and who has a PPE and 
 * MongoDB
 * Serilog (??)
 * FluentValidation
-* Swagger UI 5.5.0
+* Swagger
 * .NET Core Native DI
-* SpecFlow for BDD
-* GitHub Actions
 
 ## Architecture:
 * Hexagonal Architecture
@@ -39,13 +38,14 @@ Besides that, this system allows that you see all the PPE and who has a PPE and 
 * Domain Driven Design
 * Repository Pattern
 * Notification Pattern
-* Mapper by Extension Methods
 * Value Types
-* BDD (Behavior Driven Development)
-
-![Architecture](https://miro.medium.com/max/962/1*qpHCIA7RDfW89KtSUXGJog.png)
 
 ## News:
+**v1.5 --- 2021-11-30**
+* Migrate to Hexagonal Architecture
+* Include MongoDB
+* Refactors to improve the code
+
 **v1.4 --- 2020-09-28**
 * CI/CD by GitHub Actions
 * Include integration tests using BDD with SpecFlow
@@ -81,6 +81,17 @@ Besides that, this system allows that you see all the PPE and who has a PPE and 
 * Configured the connection to MySql database
 * Used EntityFramework
 
+---
+
+## Hexagonal Architecture
+[TO-DO]
+
+### Why did I choose this design?
+[TO-DO]
+
+
+---
+
 ## Why Aurora?
 The name Aurora came from the natural event called Aurora Borealis. It is a scientific event described by the interaction between the earth's magnetic layer and energized particles from the solar wind.
 
@@ -98,4 +109,5 @@ The Aurora project was developed by [Alex Alves](https://www.linkedin.com/in/ale
 
 # References:
 * https://medium.com/@alexalves_85598/criando-uma-api-em-net-core-baseado-na-arquitetura-ddd-2c6a409c686
-* 
+* https://alexalvess.medium.com/organizando-seu-projeto-net-com-arquitetura-hexagonal-parte-01-a598662a3818
+* https://alexalvess.medium.com/organizando-seu-projeto-net-com-arquitetura-hexagonal-parte-02-fe9a8ed6ab02
