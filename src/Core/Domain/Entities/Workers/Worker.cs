@@ -1,27 +1,13 @@
-﻿using Domain.Abstractions.Entities;
-using Domain.ValueTypes;
-using MongoDB.Bson;
-using System;
+﻿using Domain.Abstractions.DomainEntities.Employees;
+using Domain.ValueObjects.Epis;
+using System.Collections.Generic;
 
 namespace Domain.Entities.Workers;
 
-public class Worker : Entity<ObjectId>
+public class Worker : Employee
 {
-    public Name Name { get; init; }
-
-    public Nin Nin { get; init; }
-
-    public Password Password { get; init; }
-
-    public DateOnly BirthDate { get; init; }
+    public ICollection<Epi> Epis { get; private set; }
 
     protected override bool Validate()
-    {
-        AddErrors(Name.Errors);
-        AddErrors(Nin.Errors);
-        AddErrors(Password.Errors);
-
-        return OnValidate<WorkerValidator, Worker>();
-    }
+        => base.Validate();
 }
-
