@@ -1,4 +1,4 @@
-![Aurora Project](https://repository-images.githubusercontent.com/128673011/f6ebdd80-b6da-11ea-94bb-9d141944b257)
+﻿![Aurora Project](./img/logo.png)
 
 # What is Aurora project?
 It's an open source project, written in .NET, currently in version 6.
@@ -24,7 +24,6 @@ Besides that, this system allows that you see all the PPE and who has a PPE and 
 * .NET 6
 * C# 10
 * MongoDB
-* Serilog (??)
 * FluentValidation
 * Swagger
 * .NET Core Native DI
@@ -71,7 +70,7 @@ Besides that, this system allows that you see all the PPE and who has a PPE and 
 * Updated the project's SDK to .NET Core 3.1 version
 * Added the Swagger framework to document the API
 * Corrections to end-points
-* Published in [Azure](http://aurora-project.azurewebsites.net/swagger/index.html)
+* Published in Azure
 
 **v1.0 --- 2018-06-09**
 * Create the project in .NET Core 2.0 version
@@ -84,10 +83,13 @@ Besides that, this system allows that you see all the PPE and who has a PPE and 
 ---
 
 ## Hexagonal Architecture
+![Design Architectural](./img/aurora_architecture.png)
 [TO-DO]
 
 ### Why did I choose this design?
-[TO-DO]
+* It's very easy to include, or exclude, a framework or external library in a separate DLL.
+* The focus is in Core layer. So the business rules/your domain stay very uncoupled of external things.
+* I'm an enthusiast for this Design 😁🤓
 
 
 ---
@@ -98,9 +100,6 @@ The name Aurora came from the natural event called Aurora Borealis. It is a scie
 A curiosity about such an event is that what we see in photographs is not always the same image that is seen live.
 
 For more information, look this [link](https://www.hipercultura.com/fenomenos-naturais/).
-
-## We're online!
-See the project in [Azure](http://aurora-project.azurewebsites.net/swagger/index.html).
 
 ## About:
 The Aurora project was developed by [Alex Alves](https://www.linkedin.com/in/alexalvess/).
