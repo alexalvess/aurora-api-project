@@ -17,7 +17,7 @@ namespace WebApi.Controllers
             => _workerDomainService = workerDomainService;
 
         [HttpPost]
-        public async Task<IActionResult> RegisterWorkerAsync([FromBody] RegisterWorkerDto registerWorker, CancellationToken cancellationToken)
+        public async Task<IActionResult> RegisterWorkerAsync([FromBody] RegisterOperatorDto registerWorker, CancellationToken cancellationToken)
         {
             await _workerDomainService.RegisterWorkerAsync(registerWorker, cancellationToken);
             return Ok();

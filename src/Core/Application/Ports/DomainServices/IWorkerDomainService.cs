@@ -6,5 +6,5 @@ namespace Application.Ports.DomainServices;
 
 public interface IWorkerDomainService
 {
-    Task RegisterWorkerAsync(RegisterWorkerDto registerWorkerDto, CancellationToken cancellationToken);
+    Task RegisterWorkerAsync(RegisterOperatorDto registerWorkerDto, CancellationToken cancellationToken);
 }

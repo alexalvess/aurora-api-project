@@ -17,5 +17,5 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddMongoDbServices(this IServiceCollection services)
         => services
-            .AddScoped<IWorkerService, WorkerService>();
+            .AddScoped<IOperatorService, OperatorService>();
 }
