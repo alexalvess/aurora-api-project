@@ -84,7 +84,6 @@ Besides that, this system allows that you see all the PPE and who has a PPE and 
 
 ## Hexagonal Architecture
 ![Design Architectural](./img/aurora_architecture.png)
-[TO-DO]
 
 ### Why did I choose this design?
 * It's very easy to include, or exclude, a framework or external library in a separate DLL.
