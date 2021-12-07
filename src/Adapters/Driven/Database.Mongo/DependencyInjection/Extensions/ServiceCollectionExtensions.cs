@@ -13,7 +13,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddMongoDbRepositories(this IServiceCollection services)
         => services
-            .AddTransient<IWorkerRepository, WorkerRepository>();
+            .AddTransient<IOperatorRepository, OperatorRepository>();
 
     public static IServiceCollection AddMongoDbServices(this IServiceCollection services)
         => services

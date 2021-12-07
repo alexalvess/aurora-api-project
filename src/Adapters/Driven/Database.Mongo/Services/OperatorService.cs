@@ -1,5 +1,5 @@
 ﻿using Application.Ports.MongoServices;
-using DataBase.Mongo.Repositories;
+using DataBase.Mongo.Repositories.OperatorRepository;
 using Domain.Aggregates.Employee.Operator;
 using MongoDB.Bson;
 using System;
@@ -11,22 +11,22 @@ namespace DataBase.Mongo.Services;
 
 public class OperatorService : IOperatorService
 {
-    private readonly IWorkerRepository _workerRepository;
+    private readonly IOperatorRepository _operatorRepository;
 
-    public OperatorService(IWorkerRepository workerRepository)
-        => _workerRepository = workerRepository;
+    public OperatorService(IOperatorRepository operatorRepository)
+        => _operatorRepository = operatorRepository;
 
     public Task SaveNewOperatorAsync(Operator @operator, CancellationToken cancellationToken)
-        => _workerRepository.SaveAsync(@operator, cancellationToken);
+        => _operatorRepository.SaveAsync(@operator, cancellationToken);
 
     public Task UpdateOperatorAsync(Operator @operator, CancellationToken cancellationToken)
-        => _workerRepository.Upsert<Operator>(prop => prop.Id.Equals(@operator.Id), @operator, cancellationToken);
+        => _operatorRepository.Upsert(prop => prop.Id.Equals(@operator.Id), @operator, cancellationToken);
 
     public Task<Operator> GetOperatorByIdAsync(ObjectId workerId, CancellationToken cancellationToken)
-        => _workerRepository.FindAsync<Operator>(prop => prop.Id.Equals(workerId), cancellationToken);
+        => _operatorRepository.FindAsync<Operator>(prop => prop.Id.Equals(workerId), cancellationToken);
 
     public Task<List<Operator>> GetAllOperators(CancellationToken cancellationToken)
-        => _workerRepository.GetAllAsync<Operator>(cancellationToken);
+        => _operatorRepository.GetAllAsync<Operator>(cancellationToken);
 
 
 }
