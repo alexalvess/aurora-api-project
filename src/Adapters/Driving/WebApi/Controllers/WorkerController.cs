@@ -11,15 +11,15 @@ namespace WebApi.Controllers
     [ApiController]
     public class WorkerController : ControllerBase
     {
-        private readonly IWorkerDomainService _workerDomainService;
+        private readonly IOperatorDomainService _workerDomainService;
 
-        public WorkerController(IWorkerDomainService workerDomainService)
+        public WorkerController(IOperatorDomainService workerDomainService)
             => _workerDomainService = workerDomainService;
 
         [HttpPost]
         public async Task<IActionResult> RegisterWorkerAsync([FromBody] RegisterOperatorDto registerWorker, CancellationToken cancellationToken)
         {
-            await _workerDomainService.RegisterWorkerAsync(registerWorker, cancellationToken);
+            await _workerDomainService.RegisterOperatorAsync(registerWorker, cancellationToken);
             return Ok();
         }
 

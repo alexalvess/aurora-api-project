@@ -3,8 +3,4 @@
     <PackageReference Include="FluentValidation" Version="$(FluentValidation_Version)" />
     <PackageReference Include="MongoDB.Bson" Version="$(MongoDB_Driver_Version)" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Aggregates\Employee\Manager\" />
-    <Folder Include="Entities\" />
-  </ItemGroup>
 </Project>

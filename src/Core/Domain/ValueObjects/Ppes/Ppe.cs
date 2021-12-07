@@ -2,16 +2,14 @@
 using MongoDB.Bson;
 using System;
 
-namespace Domain.ValueObjects.Epis;
+namespace Domain.ValueObjects.Ppes;
 
-public record Epi : ValueObject
+public record Ppe : ValueObject
 {
     public ObjectId Id { get; init; }
 
     public DateOnly Expiration { get; init; }
 
     protected override bool Validate()
-    {
-        throw new NotImplementedException();
-    }
+        => OnValidate<PpeValidator, Ppe>();
 }

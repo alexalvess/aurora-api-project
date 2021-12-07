@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Abstractions.Entities;
 
-public abstract class Entity<TId> : IEntity<TId>
-    where TId : struct
+public abstract class Entity : IEntity
 {
     [BsonIgnore]
     private ValidationResult _validationResult = new();
@@ -26,13 +25,13 @@ public abstract class Entity<TId> : IEntity<TId>
     protected void AddErrors(IReadOnlyCollection<ValidationFailure> failures)
         => _validationResult.Errors.AddRange(failures);
 
-    public TId Id { get; protected set; }
+    
 
     public bool IsDeleted { get; protected set; }
 
     protected bool OnValidate<TValidator, TEntity>()
         where TValidator : AbstractValidator<TEntity>, new()
-        where TEntity : Entity<TId>
+        where TEntity : Entity
     {
         var validationResult = new TValidator().Validate(this as TEntity);
         _validationResult.Errors.AddRange(validationResult.Errors);

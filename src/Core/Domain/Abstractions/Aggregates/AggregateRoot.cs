@@ -2,5 +2,8 @@
 
 namespace Domain.Abstractions.Aggregates;
 
-public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot<TId>
-    where TId : struct { }
+public abstract class AggregateRoot<TId> : Entity, IAggregateRoot<TId>
+    where TId : struct 
+{
+    public TId Id { get; protected set; }
+}

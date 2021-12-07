@@ -2,7 +2,6 @@
 using Application.Ports.DomainServices;
 using Application.Ports.MongoServices;
 using Domain.Aggregates.Employee.Operator;
-using Domain.ValueObjects.Epis;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -10,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace Application.DomainServices;
 
-public class OperatorDomainService : IWorkerDomainService
+public class OperatorDomainService : IOperatorDomainService
 {
     private readonly IOperatorService _workerService;
 
     public OperatorDomainService(IOperatorService workerService)
         => _workerService = workerService;
 
-    public async Task RegisterWorkerAsync(RegisterOperatorDto registerWorkerDto, CancellationToken cancellationToken)
+    public async Task RegisterOperatorAsync(RegisterOperatorDto registerWorkerDto, CancellationToken cancellationToken)
     {
         Operator @operator = new()
         {
@@ -33,8 +32,8 @@ public class OperatorDomainService : IWorkerDomainService
         await _workerService.SaveNewOperatorAsync(@operator, cancellationToken);
     }
 
-    public async Task DistributeEpisAsync(IReadOnlyCollection<DistributeEpiDto> distributeEpisDto, CancellationToken cancellationToken)
-    {
+    //public async Task DistributePpesAsync(IReadOnlyCollection<DistributeEpiDto> distributeEpisDto, CancellationToken cancellationToken)
+    //{
 
-    }
+    //}
 }

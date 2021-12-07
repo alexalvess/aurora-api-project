@@ -1,6 +1,7 @@
 ﻿namespace Domain.Abstractions.Aggregates;
 
-public interface IAggregateRoot<TId> 
+public interface IAggregateRoot<out TId> 
     where TId : struct
 {
+    TId Id { get; }
 }

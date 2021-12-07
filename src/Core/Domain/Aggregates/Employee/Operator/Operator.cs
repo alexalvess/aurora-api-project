@@ -1,5 +1,5 @@
 ﻿using Domain.Enumerations;
-using Domain.ValueObjects.Epis;
+using Domain.ValueObjects.Ppes;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
@@ -11,28 +11,28 @@ public class Operator : Employee
 {
     public WorkShift WorkShift { get; private set; } = WorkShift.MorningShift;
 
-    public ICollection<Epi> Epis { get; private set; }
+    public ICollection<Ppe> Ppes { get; private set; }
 
     public void ChangeShift(WorkShift workShift)
         => WorkShift = workShift;
 
-    public void AddApis(List<Epi> epis)
-        => epis.ForEach(epi => Epis.Add(epi));
+    public void AddPpes(List<Ppe> epis)
+        => epis.ForEach(epi => Ppes.Add(epi));
 
-    public IReadOnlyCollection<Epi> RemoveExpiredEpis()
+    public IReadOnlyCollection<Ppe> RemoveExpiredPpes()
     {
-        var experied = Epis.Where(epi => epi.Expiration < DateOnly.FromDateTime(DateTime.Now));
+        var experied = Ppes.Where(epi => epi.Expiration < DateOnly.FromDateTime(DateTime.Now));
 
-        Epis = Epis.Where(epi => epi.Expiration >= DateOnly.FromDateTime(DateTime.Now)).ToList();
+        Ppes = Ppes.Where(epi => epi.Expiration >= DateOnly.FromDateTime(DateTime.Now)).ToList();
 
         return experied.ToList();
     }
 
-    public Epi ReturnEpi(ObjectId epiId)
+    public Ppe ReturnPpe(ObjectId epiId)
     {
-        var epi = Epis.First(epi => epi.Id.Equals(epiId));
+        var epi = Ppes.First(epi => epi.Id.Equals(epiId));
 
-        Epis.Remove(epi);
+        Ppes.Remove(epi);
 
         return epi;
     }

@@ -21,7 +21,11 @@ public abstract class Employee : AggregateRoot<Guid>, IEmployee
 
     public DateOnly? TerminationDate { get; protected set; }
 
-    //public abstract ICollection<TReturn> TurnOffEmployee<TReturn>() where TReturn : class;
+    public virtual void TurnOffEmployee()
+    {
+        Active = false;
+        TerminationDate = DateOnly.FromDateTime(DateTime.Now);
+    }
 
     protected override bool Validate()
     {

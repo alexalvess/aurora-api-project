@@ -8,5 +8,5 @@ public static class ServiceCollectionExtension
 {
     public static IServiceCollection AddDomainServices(this IServiceCollection services)
         => services
-            .AddScoped<IWorkerDomainService, OperatorDomainService>();
+            .AddScoped<IOperatorDomainService, OperatorDomainService>();
 }

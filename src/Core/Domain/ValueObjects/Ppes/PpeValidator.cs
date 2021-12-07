@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 using System;
 
-namespace Domain.ValueObjects.Epis;
+namespace Domain.ValueObjects.Ppes;
 
-public class EpiValidator : AbstractValidator<Epi>
+public class PpeValidator : AbstractValidator<Ppe>
 {
-    public EpiValidator()
+    public PpeValidator()
     {
         RuleFor(epi => epi.Id)
             .NotEmpty().NotNull()
