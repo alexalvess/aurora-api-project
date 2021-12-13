@@ -6,7 +6,7 @@ namespace Domain.ValueObjects.Ppes;
 
 public record Ppe : ValueObject
 {
-    public ObjectId Id { get; init; }
+    public ObjectId InventoryId { get; init; }
 
     public DateOnly Expiration { get; init; }
 

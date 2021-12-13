@@ -1,6 +1,6 @@
 ﻿using Application.Ports.MongoServices;
 using DataBase.Mongo.Context;
-using DataBase.Mongo.Repositories;
+using DataBase.Mongo.Repositories.OperatorRepository;
 using DataBase.Mongo.Services;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -30,7 +30,7 @@ public class Operator : Employee
 
     public Ppe ReturnPpe(ObjectId epiId)
     {
-        var epi = Ppes.First(epi => epi.Id.Equals(epiId));
+        var epi = Ppes.First(epi => epi.InventoryId.Equals(epiId));
 
         Ppes.Remove(epi);
 

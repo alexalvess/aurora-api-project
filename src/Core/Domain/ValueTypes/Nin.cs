@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Domain.ValueTypes;
 
-public struct Nin : IValueType
+public struct Nin : IValueType<string>
 {
     private readonly string _nin;
     private readonly List<ValidationFailure> _errors;
@@ -21,6 +21,8 @@ public struct Nin : IValueType
     public bool IsValid => Errors?.Any() is false;
 
     public IReadOnlyCollection<ValidationFailure> Errors { get; private set; }
+
+    public string Value => _nin;
 
     public override string ToString() =>
         _nin;

@@ -25,8 +25,6 @@ public abstract class Entity : IEntity
     protected void AddErrors(IReadOnlyCollection<ValidationFailure> failures)
         => _validationResult.Errors.AddRange(failures);
 
-    
-
     public bool IsDeleted { get; protected set; }
 
     protected bool OnValidate<TValidator, TEntity>()

@@ -1,14 +1,18 @@
 ﻿using Domain.Abstractions.Aggregates;
+using Domain.Serializers;
 using Domain.ValueTypes;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 
 namespace Domain.Aggregates.Employee;
 
-public abstract class Employee : AggregateRoot<Guid>, IEmployee
+public abstract class Employee : AggregateRoot<ObjectId>, IEmployee
 {
     public bool Active { get; protected set; } = true;
 
+    [BsonSerializer(typeof(StructBsonSerializer))]
     public Name Name { get; init; }
 
     public Nin Nin { get; init; }
