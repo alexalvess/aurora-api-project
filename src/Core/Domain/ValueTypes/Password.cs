@@ -8,7 +8,7 @@ namespace Domain.ValueTypes;
 
 public struct Password : IValueType<string>
 {
-    private readonly string _password;
+    private string _password;
     private readonly List<ValidationFailure> _errors;
 
     private Password(string password)
@@ -43,5 +43,11 @@ public struct Password : IValueType<string>
             _errors.Add(new ValidationFailure(GetType().Name, "The password must not have any special char."));
 
         Errors = _errors;
+    }
+
+    public void Create(object value)
+    {
+        _password = value.ToString();
+        Validate();
     }
 }

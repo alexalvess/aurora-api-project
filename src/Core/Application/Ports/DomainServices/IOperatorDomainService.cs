@@ -8,4 +8,6 @@ namespace Application.Ports.DomainServices;
 public interface IOperatorDomainService
 {
     Task<ObjectId> RegisterOperatorAsync(RegisterOperatorDto registerWorkerDto, CancellationToken cancellationToken);
+
+    Task<RetrieveOperatorDetailsDto> RetrieveOperatorDetailsAsync(string operatorId, CancellationToken cancellationToken);
 }

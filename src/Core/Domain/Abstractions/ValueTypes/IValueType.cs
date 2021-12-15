@@ -17,4 +17,6 @@ public interface IValueType<TValue>
     public IReadOnlyCollection<ValidationFailure> Errors { get; }
 
     public TValue Value { get; }
+
+    public void Create(object value);
 }

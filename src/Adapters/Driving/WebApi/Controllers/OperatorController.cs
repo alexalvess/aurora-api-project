@@ -33,9 +33,10 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("{id}", Name = nameof(OperatorController.RecoverOperatorByIdAsync))]
-        public async Task<IActionResult> RecoverOperatorByIdAsync([FromRoute] string id)
+        public async Task<IActionResult> RecoverOperatorByIdAsync([FromRoute] string id, CancellationToken cancellationToken)
         {
-            return Ok();
+            var operatorDetails = await _operatorDomainService.RetrieveOperatorDetailsAsync(id, cancellationToken);
+            return Ok(operatorDetails);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Domain.Abstractions.ValueTypes;
 using FluentValidation.Results;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -8,7 +9,7 @@ namespace Domain.ValueTypes;
 
 public struct Name : IValueType<string>
 {
-    private readonly string _name;
+    private string _name;
     private readonly List<ValidationFailure> _errors;
 
     private Name(string name)
@@ -43,5 +44,11 @@ public struct Name : IValueType<string>
             _errors.Add(new ValidationFailure(GetType().Name, "The name must not have any special char."));
 
         Errors = _errors;
+    }
+
+    public void Create(object value)
+    {
+        _name = value.ToString();
+        Validate();
     }
 }
