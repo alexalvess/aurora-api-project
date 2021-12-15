@@ -2,6 +2,7 @@
 using Application.Ports.DomainServices;
 using Application.Ports.MongoServices;
 using Domain.Aggregates.Employee.Operator;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -11,12 +12,12 @@ namespace Application.DomainServices;
 
 public class OperatorDomainService : IOperatorDomainService
 {
-    private readonly IOperatorService _workerService;
+    private readonly IOperatorService _operatorService;
 
-    public OperatorDomainService(IOperatorService workerService)
-        => _workerService = workerService;
+    public OperatorDomainService(IOperatorService operatorService)
+        => _operatorService = operatorService;
 
-    public async Task RegisterOperatorAsync(RegisterOperatorDto registerWorkerDto, CancellationToken cancellationToken)
+    public async Task<ObjectId> RegisterOperatorAsync(RegisterOperatorDto registerWorkerDto, CancellationToken cancellationToken)
     {
         Operator @operator = new()
         {
@@ -27,9 +28,11 @@ public class OperatorDomainService : IOperatorDomainService
         };
 
         if (@operator.IsValid is false)
-            return;
+            return default;
 
-        await _workerService.SaveNewOperatorAsync(@operator, cancellationToken);
+        await _operatorService.SaveNewOperatorAsync(@operator, cancellationToken);
+
+        return @operator.Id;
     }
 
     //public async Task DistributePpesAsync(IReadOnlyCollection<DistributeEpiDto> distributeEpisDto, CancellationToken cancellationToken)
