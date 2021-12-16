@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Net;
+using System.Text.Json;
 using System.Threading.Tasks;
 using WebApi.Filters;
 using WebApi.HostedServices;
@@ -18,6 +20,13 @@ builder.Services
     .AddControllers(options =>
     {
         options.Filters.Add<ResponseFilter>();
+    })
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.ContractResolver = new DefaultContractResolver
+        {
+            NamingStrategy = new CamelCaseNamingStrategy()
+        };
     });
 
 builder.Services.AddHostedService<VerifyExperiedPpeService>();
@@ -35,6 +44,9 @@ builder.Services
 
 builder.Services
     .AddNotificationContext();
+
+builder.Services
+    .AddScoped<Queryable>();
 
 var app = builder.Build();
 

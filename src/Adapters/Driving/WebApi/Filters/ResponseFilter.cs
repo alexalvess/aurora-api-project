@@ -1,7 +1,11 @@
 ﻿using Application.Envelop;
+using Application.Extensions;
 using Application.Ports.NotificationServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 using System.Linq;
 using System.Net;
 using System.Text.Encodings.Web;
@@ -14,9 +18,10 @@ namespace WebApi.Filters;
 public class ResponseFilter : IResultFilter
 {
     private readonly INotificationContext _notificationContext;
+    private readonly Application.Envelop.Queryable _queryable;
 
-    public ResponseFilter(INotificationContext notificationContext)
-        => _notificationContext = notificationContext;
+    public ResponseFilter(INotificationContext notificationContext, Application.Envelop.Queryable queryable)
+        => (_notificationContext, _queryable) = (notificationContext, queryable);
 
     public void OnResultExecuted(ResultExecutedContext context)
     {
@@ -40,6 +45,15 @@ public class ResponseFilter : IResultFilter
             };
 
             context.Result = new JsonResult(contentResponse, serializeOptions);
+        }
+        else
+        {
+            var result = _queryable.SelectFields(((ObjectResult)context.Result).Value);
+            if (result != default)
+                context.Result = new ObjectResult(result);
+
+            if(_queryable.Wrap)
+                context.Result = new ObjectResult(new Response(((ObjectResult)context.Result).Value));
         }
     }
 }

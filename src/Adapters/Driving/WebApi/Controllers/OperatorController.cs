@@ -1,4 +1,6 @@
 ﻿using Application.DataTransferObject;
+using Application.Envelop;
+using Application.Extensions;
 using Application.Ports.DomainServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,9 +17,10 @@ namespace WebApi.Controllers
     public class OperatorController : ControllerBase
     {
         private readonly IOperatorDomainService _operatorDomainService;
+        private Queryable _queryable;
 
-        public OperatorController(IOperatorDomainService operatorDomainService)
-            => _operatorDomainService = operatorDomainService;
+        public OperatorController(IOperatorDomainService operatorDomainService, Queryable queryable)
+            => (_operatorDomainService, _queryable) = (operatorDomainService, queryable);
 
         [HttpPost]
         public async Task<IActionResult> RegisterOperatorAsync([FromBody] RegisterOperatorDto registerOperator, CancellationToken cancellationToken)
@@ -26,10 +29,13 @@ namespace WebApi.Controllers
             return CreatedAtRoute(nameof(this.RecoverOperatorByIdAsync), routeValues: new { id = operatorId.ToString() }, null);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> RecoverOperatorsAsync()
+        [HttpGet(Name = nameof(OperatorController.RecoverOperatorsAsync))]
+        public async Task<IActionResult> RecoverOperatorsAsync([FromQuery] Queryable queryable, CancellationToken cancellationToken)
         {
-            return Ok();
+            _queryable.Bind(queryable);
+
+            var operators = await _operatorDomainService.RetrieveOperatorsAsync(cancellationToken);
+            return Ok(operators);
         }
 
         [HttpGet("{id}", Name = nameof(OperatorController.RecoverOperatorByIdAsync))]

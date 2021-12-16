@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Application.Envelop;
 
-public class Response
+public record Response
 {
     private List<string> _errors;
 

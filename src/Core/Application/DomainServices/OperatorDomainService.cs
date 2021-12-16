@@ -6,6 +6,7 @@ using Domain.Aggregates.Employee.Operator;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -54,6 +55,24 @@ public class OperatorDomainService : IOperatorDomainService
             @operator.WorkShift,
             @operator.Active,
             @operator.AdmissionDate);
+    }
+
+    public async Task<IEnumerable<RetrieveOperators>> RetrieveOperatorsAsync(CancellationToken cancellationToken)
+    {
+        var operators = await _operatorService.GetAllOperators(cancellationToken);
+
+        if(operators?.Count is 0)
+        {
+            _notificationContext.AddNotification("No operators found.");
+            return default;
+        }
+
+        return operators.Select(@operator => 
+            new RetrieveOperators(
+                @operator.Name.ToString(), 
+                @operator.BirthDate, 
+                @operator.Nin.ToString(), 
+                @operator.WorkShift));
     }
 
     //public async Task DistributePpesAsync(IReadOnlyCollection<DistributeEpiDto> distributeEpisDto, CancellationToken cancellationToken)
