@@ -25,8 +25,8 @@ public class OperatorService : IOperatorService
     public Task<Operator> GetOperatorByIdAsync(ObjectId workerId, CancellationToken cancellationToken)
         => _operatorRepository.FindAsync<Operator>(prop => prop.Id.Equals(workerId), cancellationToken);
 
-    public Task<List<Operator>> GetAllOperators(CancellationToken cancellationToken)
-        => _operatorRepository.GetAllAsync<Operator>(cancellationToken);
+    public Task<IEnumerable<Operator>> GetAllOperators(List<string> fields, CancellationToken cancellationToken)
+        => _operatorRepository.GetAllAsync<Operator>(fields, cancellationToken);
 
 
 }

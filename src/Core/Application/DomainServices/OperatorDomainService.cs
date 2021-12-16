@@ -16,9 +16,10 @@ public class OperatorDomainService : IOperatorDomainService
 {
     private readonly IOperatorService _operatorService;
     private readonly INotificationContext _notificationContext;
+    private readonly Envelop.Queryable _queryable;
 
-    public OperatorDomainService(IOperatorService operatorService, INotificationContext notificationContext)
-        => (_operatorService, _notificationContext) = (operatorService, notificationContext);
+    public OperatorDomainService(IOperatorService operatorService, INotificationContext notificationContext, Envelop.Queryable queryable)
+        => (_operatorService, _notificationContext, _queryable) = (operatorService, notificationContext, queryable);
 
     public async Task<ObjectId> RegisterOperatorAsync(RegisterOperatorDto registerOperatorDto, CancellationToken cancellationToken)
     {
@@ -59,9 +60,9 @@ public class OperatorDomainService : IOperatorDomainService
 
     public async Task<IEnumerable<RetrieveOperators>> RetrieveOperatorsAsync(CancellationToken cancellationToken)
     {
-        var operators = await _operatorService.GetAllOperators(cancellationToken);
+        var operators = await _operatorService.GetAllOperators(_queryable.Fields, cancellationToken);
 
-        if(operators?.Count is 0)
+        if(!operators?.Any() ?? true)
         {
             _notificationContext.AddNotification("No operators found.");
             return default;
@@ -70,7 +71,7 @@ public class OperatorDomainService : IOperatorDomainService
         return operators.Select(@operator => 
             new RetrieveOperators(
                 @operator.Name.ToString(), 
-                @operator.BirthDate, 
+                @operator.BirthDate == default ? null : @operator.BirthDate, 
                 @operator.Nin.ToString(), 
                 @operator.WorkShift));
     }

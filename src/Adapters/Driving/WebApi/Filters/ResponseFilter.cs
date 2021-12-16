@@ -48,9 +48,9 @@ public class ResponseFilter : IResultFilter
         }
         else
         {
-            var result = _queryable.SelectFields(((ObjectResult)context.Result).Value);
-            if (result != default)
-                context.Result = new ObjectResult(result);
+            //var result = _queryable.SelectFields(((ObjectResult)context.Result).Value);
+            //if (result != default)
+            //    context.Result = new ObjectResult(result);
 
             if(_queryable.Wrap)
                 context.Result = new ObjectResult(new Response(((ObjectResult)context.Result).Value));

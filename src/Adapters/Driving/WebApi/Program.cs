@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Conventions;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Net;
@@ -27,6 +30,9 @@ builder.Services
         {
             NamingStrategy = new CamelCaseNamingStrategy()
         };
+
+        options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Populate;
+        options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
     });
 
 builder.Services.AddHostedService<VerifyExperiedPpeService>();
@@ -55,6 +61,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+var camelCaseConventionPack = new ConventionPack { new CamelCaseElementNameConvention() };
+ConventionRegistry.Register("CamelCase", camelCaseConventionPack, type => true);
 
 app.UseExceptionHandler(appBuilder => appBuilder.Run(async httpContext =>
 {

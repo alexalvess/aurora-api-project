@@ -22,7 +22,7 @@ public class InventoryService : IInventoryService
         => _inventoryRepository.FindAsync<Inventory>(inventory => inventory.Id.Equals(inventoryId), cancellationToken);
 
     public Task<List<Inventory>> GetAllInventoryAsync(CancellationToken cancellationToken)
-        => _inventoryRepository.GetAllAsync<Inventory>(cancellationToken);
+        => default;// _inventoryRepository.GetAllAsync<Inventory>(cancellationToken);
 
     public Task UpdateInventoryAsync(Inventory inventory, CancellationToken cancellationToken)
         => _inventoryRepository.Upsert(item => item.Id.Equals(inventory.Id), inventory, cancellationToken);

@@ -13,7 +13,7 @@ public interface IMongoRepository
     Task<TCollection> FindAsync<TCollection>(Expression<Func<TCollection, bool>> predicate, CancellationToken cancellationToken)
         where TCollection : class;
 
-    Task<List<TCollection>> GetAllAsync<TCollection>(CancellationToken cancellationToken)
+    Task<IEnumerable<TCollection>> GetAllAsync<TCollection>(List<string> fields, CancellationToken cancellationToken)
         where TCollection : class;
 
     Task Upsert<TCollection>(Expression<Func<TCollection, bool>> predicate, TCollection replacementCollection, CancellationToken cancellationToken)

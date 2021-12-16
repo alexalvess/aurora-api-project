@@ -9,7 +9,7 @@ namespace Domain.Aggregates.Employee.Operator;
 
 public class Operator : Employee
 {
-    public WorkShift WorkShift { get; private set; } = WorkShift.MorningShift;
+    public WorkShift WorkShift { get; private set; }
 
     public ICollection<Ppe> Ppes { get; private set; }
 

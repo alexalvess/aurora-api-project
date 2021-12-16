@@ -14,5 +14,5 @@ public interface IOperatorService
 
     Task<Operator> GetOperatorByIdAsync(ObjectId operatorId, CancellationToken cancellationToken);
 
-    Task<List<Operator>> GetAllOperators(CancellationToken cancellationToken);
+    Task<IEnumerable<Operator>> GetAllOperators(List<string> fields, CancellationToken cancellationToken);
 }
