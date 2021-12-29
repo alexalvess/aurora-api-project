@@ -1,4 +1,5 @@
 ﻿using DataBase.Mongo.Context;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System;
@@ -22,9 +23,26 @@ public abstract class MongoRepository : IMongoRepository
         where TCollection : class
         => _mongoContext.GetCollection<TCollection>().AsQueryable().Where(predicate).FirstOrDefaultAsync(cancellationToken);
 
-    public Task<List<TCollection>> GetAllAsync<TCollection>(CancellationToken cancellationToken)
+    public async Task<IEnumerable<TCollection>> GetAllAsync<TCollection>(List<string> fields, CancellationToken cancellationToken)
         where TCollection : class
-        => _mongoContext.GetCollection<TCollection>().AsQueryable().ToListAsync(cancellationToken);
+    {
+        var projection = Builders<TCollection>.Projection;
+        ProjectionDefinition<TCollection> projectionDefinition = default;
+
+        if (fields is not null && fields.Count > 0)
+        {
+            projectionDefinition = projection.Combine(fields.Select(field => projection.Include(field)));
+
+            var bsons = await _mongoContext.GetCollection<TCollection>()
+                .Find(Builders<TCollection>.Filter.Empty)
+                .Project(projectionDefinition)
+                .ToListAsync(cancellationToken);
+
+            return bsons.Select(bson => BsonSerializer.Deserialize<TCollection>(bson));
+        }
+
+        return await _mongoContext.GetCollection<TCollection>().AsQueryable().ToListAsync(cancellationToken);
+    }
 
     public Task Upsert<TCollection>(Expression<Func<TCollection, bool>> predicate, TCollection replacementCollection, CancellationToken cancellationToken)
         where TCollection : class

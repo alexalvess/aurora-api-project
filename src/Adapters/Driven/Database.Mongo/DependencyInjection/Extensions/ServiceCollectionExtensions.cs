@@ -1,6 +1,6 @@
 ﻿using Application.Ports.MongoServices;
 using DataBase.Mongo.Context;
-using DataBase.Mongo.Repositories;
+using DataBase.Mongo.Repositories.OperatorRepository;
 using DataBase.Mongo.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,9 +13,9 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddMongoDbRepositories(this IServiceCollection services)
         => services
-            .AddTransient<IWorkerRepository, WorkerRepository>();
+            .AddTransient<IOperatorRepository, OperatorRepository>();
 
     public static IServiceCollection AddMongoDbServices(this IServiceCollection services)
         => services
-            .AddScoped<IWorkerService, WorkerService>();
+            .AddScoped<IOperatorService, OperatorService>();
 }

@@ -11,6 +11,9 @@
 		
 		<!--Mongo DB-->
 		<MongoDB_Driver_Version>2.14.0</MongoDB_Driver_Version>
+		
+		<!--Validations-->
+		<FluentValidation_Version>10.3.4</FluentValidation_Version>
 
 	</PropertyGroup>
 

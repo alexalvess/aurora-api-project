@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace Domain.ValueTypes;
 
-public struct Nin : IValueType
+public struct Nin : IValueType<string>
 {
-    private readonly string _nin;
+    private string _nin;
     private readonly List<ValidationFailure> _errors;
 
     private Nin(string nin)
@@ -18,9 +18,11 @@ public struct Nin : IValueType
         Validate();
     }
 
-    public bool IsValid => Errors?.Any() is false;
+    public bool IsValid { get => Errors?.Any() ?? true; }
 
     public IReadOnlyCollection<ValidationFailure> Errors { get; private set; }
+
+    public string Value => _nin;
 
     public override string ToString() =>
         _nin;
@@ -78,5 +80,11 @@ public struct Nin : IValueType
             _errors.Add(new ValidationFailure(GetType().Name, "This CPF is invalid."));
 
         Errors = _errors;
+    }
+
+    public void Create(object value)
+    {
+        _nin = value.ToString();
+        Validate();
     }
 }

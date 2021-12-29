@@ -6,9 +6,9 @@ using System.Text.RegularExpressions;
 
 namespace Domain.ValueTypes;
 
-public struct Password : IValueType
+public struct Password : IValueType<string>
 {
-    private readonly string _password;
+    private string _password;
     private readonly List<ValidationFailure> _errors;
 
     private Password(string password)
@@ -22,6 +22,8 @@ public struct Password : IValueType
     public bool IsValid => Errors?.Any() is false;
 
     public IReadOnlyCollection<ValidationFailure> Errors { get; private set; }
+
+    public string Value => _password;
 
     public override string ToString() =>
         _password;
@@ -41,5 +43,11 @@ public struct Password : IValueType
             _errors.Add(new ValidationFailure(GetType().Name, "The password must not have any special char."));
 
         Errors = _errors;
+    }
+
+    public void Create(object value)
+    {
+        _password = value.ToString();
+        Validate();
     }
 }
