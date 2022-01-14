@@ -12,5 +12,5 @@ public interface IOperatorDomainService
 
     Task<RetrieveOperatorDetailsDto> RetrieveOperatorDetailsAsync(string operatorId, CancellationToken cancellationToken);
 
-    Task<IEnumerable<RetrieveOperators>> RetrieveOperatorsAsync(CancellationToken cancellationToken);
+    Task<IEnumerable<RetrieveOperators>> RetrieveOperatorsAsync(int limit, int offset, CancellationToken cancellationToken);
 }

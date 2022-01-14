@@ -19,7 +19,7 @@ public abstract class Entity : IEntity
         => Validate();
 
     [BsonIgnore]
-    public IEnumerable<ValidationFailure> Errors
+    public List<ValidationFailure> Errors
         => _validationResult.Errors;
 
     protected void AddErrors(IReadOnlyCollection<ValidationFailure> failures)

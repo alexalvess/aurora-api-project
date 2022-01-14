@@ -1,7 +1,9 @@
-﻿using Application.DataTransferObject;
+﻿using Application.Abstractions.Pagination;
+using Application.DataTransferObject;
 using Application.Ports.DomainServices;
 using Application.Ports.MongoServices;
 using Application.Ports.NotificationServices;
+using Domain;
 using Domain.Aggregates.Employee.Operator;
 using MongoDB.Bson;
 using System;
@@ -16,10 +18,9 @@ public class OperatorDomainService : IOperatorDomainService
 {
     private readonly IOperatorService _operatorService;
     private readonly INotificationContext _notificationContext;
-    private readonly Envelop.Queryable _queryable;
 
-    public OperatorDomainService(IOperatorService operatorService, INotificationContext notificationContext, Envelop.Queryable queryable)
-        => (_operatorService, _notificationContext, _queryable) = (operatorService, notificationContext, queryable);
+    public OperatorDomainService(IOperatorService operatorService, INotificationContext notificationContext)
+        => (_operatorService, _notificationContext) = (operatorService, notificationContext);
 
     public async Task<ObjectId> RegisterOperatorAsync(RegisterOperatorDto registerOperatorDto, CancellationToken cancellationToken)
     {
@@ -32,7 +33,11 @@ public class OperatorDomainService : IOperatorDomainService
         };
 
         if (@operator.IsValid is false)
+        {
+            _notificationContext.AddNotifications(@operator.Errors);
+
             return default;
+        }
 
         await _operatorService.SaveNewOperatorAsync(@operator, cancellationToken);
 
@@ -43,9 +48,9 @@ public class OperatorDomainService : IOperatorDomainService
     {
         var @operator = await _operatorService.GetOperatorByIdAsync(new ObjectId(operatorId), cancellationToken);
 
-        if(@operator is null)
+        if (@operator is null)
         {
-            _notificationContext.AddNotification("This operator was not found.");
+            _notificationContext.AddNotification(nameof(DomainErrorsResource.GetOperator_NotFound), DomainErrorsResource.GetOperator_NotFound);
             return default;
         }
 
@@ -58,26 +63,27 @@ public class OperatorDomainService : IOperatorDomainService
             @operator.AdmissionDate);
     }
 
-    public async Task<IEnumerable<RetrieveOperators>> RetrieveOperatorsAsync(CancellationToken cancellationToken)
+    public async Task<IEnumerable<RetrieveOperators>> RetrieveOperatorsAsync(int limit, int offset, CancellationToken cancellationToken)
     {
-        var operators = await _operatorService.GetAllOperators(_queryable.Fields, cancellationToken);
-
-        if(!operators?.Any() ?? true)
+        var paging = new Paging
         {
-            _notificationContext.AddNotification("No operators found.");
+            Limit = limit,
+            Offset = offset,
+        };
+
+        var operators = await _operatorService.GetAllOperators(paging, cancellationToken);
+
+        if(!operators.Items?.Any() ?? true)
+        {
+            _notificationContext.AddNotification(nameof(DomainErrorsResource.GetOperators_NotFound), DomainErrorsResource.GetOperators_NotFound);
             return default;
         }
 
-        return operators.Select(@operator => 
+        return operators.Items.Select(@operator => 
             new RetrieveOperators(
                 @operator.Name.ToString(), 
                 @operator.BirthDate == default ? null : @operator.BirthDate, 
                 @operator.Nin.ToString(), 
                 @operator.WorkShift));
     }
-
-    //public async Task DistributePpesAsync(IReadOnlyCollection<DistributeEpiDto> distributeEpisDto, CancellationToken cancellationToken)
-    //{
-
-    //}
 }

@@ -2,7 +2,10 @@
 using DataBase.Mongo.Repositories.InventoryRepository;
 using Domain.Aggregates.Inventory;
 using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,10 +22,9 @@ public class InventoryService : IInventoryService
         => _inventoryRepository.SaveAsync(inventory, cancellationToken);
 
     public Task<Inventory> GetInventoryByIdAsync(ObjectId inventoryId, CancellationToken cancellationToken)
-        => _inventoryRepository.FindAsync<Inventory>(inventory => inventory.Id.Equals(inventoryId), cancellationToken);
-
-    public Task<List<Inventory>> GetAllInventoryAsync(CancellationToken cancellationToken)
-        => default;// _inventoryRepository.GetAllAsync<Inventory>(cancellationToken);
+        => _inventoryRepository.FindAsync<Inventory>(
+                inventory => inventory.Id.Equals(inventoryId),
+                cancellationToken);
 
     public Task UpdateInventoryAsync(Inventory inventory, CancellationToken cancellationToken)
         => _inventoryRepository.Upsert(item => item.Id.Equals(inventory.Id), inventory, cancellationToken);

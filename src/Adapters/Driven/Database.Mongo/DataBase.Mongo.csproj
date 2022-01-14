@@ -3,6 +3,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="$(Microsoft_Extensions_Version)" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(Microsoft_Extensions_Version)" />
     <PackageReference Include="MongoDB.Driver" Version="$(MongoDB_Driver_Version)" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.15" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\Application\Application.csproj" />

@@ -1,27 +1,20 @@
 ﻿using Application.Envelop;
-using Application.Extensions;
 using Application.Ports.NotificationServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
+using System;
 using System.Linq;
 using System.Net;
-using System.Text.Encodings.Web;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Text.Unicode;
 
 namespace WebApi.Filters;
 
 public class ResponseFilter : IResultFilter
 {
     private readonly INotificationContext _notificationContext;
-    private readonly Application.Envelop.Queryable _queryable;
 
-    public ResponseFilter(INotificationContext notificationContext, Application.Envelop.Queryable queryable)
-        => (_notificationContext, _queryable) = (notificationContext, queryable);
+    public ResponseFilter(INotificationContext notificationContext)
+        => _notificationContext = notificationContext;
 
     public void OnResultExecuted(ResultExecutedContext context)
     {
@@ -30,30 +23,24 @@ public class ResponseFilter : IResultFilter
 
     public void OnResultExecuting(ResultExecutingContext context)
     {
+        object contentResponse = default;
+
         if (_notificationContext.HasNotifications)
         {
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             context.HttpContext.Response.ContentType = "application/json; charset=utf-8";
 
-            var contentResponse = new Response(_notificationContext.Notifications.Select(notification => notification.ErrorMessage).ToList());
-            var serializeOptions = new JsonSerializerOptions
+            contentResponse = _notificationContext.Notifications.Select(notification => new 
             {
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                WriteIndented = true,
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-            };
-
-            context.Result = new JsonResult(contentResponse, serializeOptions);
+                code = notification.ErrorCode,
+                field = notification.PropertyName,
+                message = notification.ErrorMessage
+            }).ToList();
         }
+
+        if (Convert.ToBoolean(context.HttpContext.Request.Query["wrap"]))
+            context.Result = new JsonResult(new Response(((ObjectResult)context.Result).Value));
         else
-        {
-            //var result = _queryable.SelectFields(((ObjectResult)context.Result).Value);
-            //if (result != default)
-            //    context.Result = new ObjectResult(result);
-
-            if(_queryable.Wrap)
-                context.Result = new ObjectResult(new Response(((ObjectResult)context.Result).Value));
-        }
+            context.Result = new JsonResult(contentResponse);
     }
 }

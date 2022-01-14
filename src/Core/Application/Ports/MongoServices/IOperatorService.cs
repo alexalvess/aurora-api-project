@@ -1,4 +1,5 @@
-﻿using Domain.Aggregates.Employee.Operator;
+﻿using Application.Abstractions.Pagination;
+using Domain.Aggregates.Employee.Operator;
 using MongoDB.Bson;
 using System.Collections.Generic;
 using System.Threading;
@@ -14,5 +15,5 @@ public interface IOperatorService
 
     Task<Operator> GetOperatorByIdAsync(ObjectId operatorId, CancellationToken cancellationToken);
 
-    Task<IEnumerable<Operator>> GetAllOperators(List<string> fields, CancellationToken cancellationToken);
+    Task<IPagedResult<Operator>> GetAllOperators(Paging paging, CancellationToken cancellationToken);
 }

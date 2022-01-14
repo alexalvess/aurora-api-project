@@ -1,5 +1,6 @@
 ﻿using Application.Ports.NotificationServices;
 using FluentValidation.Results;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,19 +19,26 @@ public class NotificationContext : INotificationContext
     public bool HasNotifications
         => _notifications.Any();
 
-    public void AddNotification(string errorMessage)
-        => _notifications.Add(new ValidationFailure(default, errorMessage));
+    public void AddNotification(string field, string error)
+        => VerifyAndAddNotification(field, error);
 
-    public void AddNotification(ValidationFailure validationFailure)
-        => VerifyAndAddNotification(validationFailure);
+    public void AddNotifications(List<ValidationFailure> validationsFailure)
+        => validationsFailure?.ForEach(item => VerifyAndAddNotification(item));
 
-    public void AddNotification(ValidationResult validationResult)
-        => validationResult.Errors.ForEach(failure => VerifyAndAddNotification(failure));
+    private void VerifyAndAddNotification(string field, string error)
+    {
+        var validationFailure = new ValidationFailure(field, error);
+        VerifyAndAddNotification(validationFailure);
+    }
 
     private void VerifyAndAddNotification(ValidationFailure validationFailure)
     {
         if (_notifications.Any(notification => notification.PropertyName.Equals(validationFailure.PropertyName)))
             return;
+
+        var errorCode = validationFailure.PropertyName.GetHashCode();
+
+        validationFailure.ErrorCode = errorCode < 0 ? (errorCode * -1).ToString() : errorCode.ToString();
 
         _notifications.Add(validationFailure);
     }

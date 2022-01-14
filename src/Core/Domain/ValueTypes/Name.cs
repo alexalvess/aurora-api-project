@@ -18,6 +18,7 @@ public struct Name : IValueType<string>
         _name = name;
         _errors = new List<ValidationFailure>();
         Validate();
+        Errors = _errors;
     }
 
     public bool IsValid => Errors?.Any() is false;
@@ -35,15 +36,22 @@ public struct Name : IValueType<string>
     private void Validate()
     {
         if (string.IsNullOrWhiteSpace(_name))
+        {
             _errors.Add(new ValidationFailure(GetType().Name, "Inform a valid name."));
+            return;
+        }
 
         if (_name.Length < 10)
+        {
             _errors.Add(new ValidationFailure(GetType().Name, "The name must have more than 10 chars."));
+            return;
+        }
 
         if (!Regex.IsMatch(_name, (@"[^a-zA-Z0-9]")))
+        {
             _errors.Add(new ValidationFailure(GetType().Name, "The name must not have any special char."));
-
-        Errors = _errors;
+            return;
+        }
     }
 
     public void Create(object value)

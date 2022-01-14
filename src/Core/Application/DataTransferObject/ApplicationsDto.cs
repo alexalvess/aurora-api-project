@@ -10,4 +10,4 @@ public record DistributeEpiDto(ObjectId epiId);
 
 public record RetrieveOperatorDetailsDto(string Name, DateTime BirthDate, string Nin, WorkShift WorkShift, bool IsActive, DateTime AdmissionDate);
 
-public record RetrieveOperators(string Name, DateTime? BirthDate, string Nin, WorkShift? WorkShift);
+public record RetrieveOperators(string Name, DateTime? BirthDate, string Nin, WorkShift WorkShift);

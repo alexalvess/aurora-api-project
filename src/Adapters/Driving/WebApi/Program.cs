@@ -51,9 +51,6 @@ builder.Services
 builder.Services
     .AddNotificationContext();
 
-builder.Services
-    .AddScoped<Queryable>();
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

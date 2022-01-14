@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Application.Abstractions.Pagination;
+using DataBase.Mongo.Abstractions.Repositories.Pagination;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -10,10 +12,28 @@ namespace DataBase.Mongo.Abstractions.Repositories;
 
 public interface IMongoRepository
 {
-    Task<TCollection> FindAsync<TCollection>(Expression<Func<TCollection, bool>> predicate, CancellationToken cancellationToken)
+    Task<TCollection> FindAsync<TCollection>(
+        Expression<Func<TCollection, bool>> predicate, 
+        CancellationToken cancellationToken)
         where TCollection : class;
 
-    Task<IEnumerable<TCollection>> GetAllAsync<TCollection>(List<string> fields, CancellationToken cancellationToken)
+    Task<TResult> FindDynamicallyAsync<TCollection, TResult>(
+        Expression<Func<TCollection, bool>> predicate,
+        Func<IQueryable<TCollection>, IQueryable<TResult>> select,
+        CancellationToken cancellationToken)
+        where TCollection : class;
+
+    Task<IPagedResult<TCollection>> GetAllAsync<TCollection>(
+        Paging paging,
+        CancellationToken cancellationToken)
+        where TCollection : class;
+
+    Task<IPagedResult<TResult>> GetAllDynamicallyAsync<TCollection, TResult>(
+        Paging paging,
+        Expression<Func<TCollection, bool>> predicate,
+        Func<IQueryable<TCollection>, IOrderedQueryable<TCollection>> orderBy,
+        Func<IQueryable<TCollection>, IQueryable<TResult>> select,
+        CancellationToken cancellationToken)
         where TCollection : class;
 
     Task Upsert<TCollection>(Expression<Func<TCollection, bool>> predicate, TCollection replacementCollection, CancellationToken cancellationToken)

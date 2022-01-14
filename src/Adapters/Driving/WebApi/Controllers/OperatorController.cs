@@ -1,14 +1,10 @@
 ﻿using Application.DataTransferObject;
-using Application.Envelop;
-using Application.Extensions;
 using Application.Ports.DomainServices;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
-using MongoDB.Bson;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
@@ -17,10 +13,9 @@ namespace WebApi.Controllers
     public class OperatorController : ControllerBase
     {
         private readonly IOperatorDomainService _operatorDomainService;
-        private Queryable _queryable;
 
-        public OperatorController(IOperatorDomainService operatorDomainService, Queryable queryable)
-            => (_operatorDomainService, _queryable) = (operatorDomainService, queryable);
+        public OperatorController(IOperatorDomainService operatorDomainService)
+            => _operatorDomainService = operatorDomainService;
 
         [HttpPost]
         public async Task<IActionResult> RegisterOperatorAsync([FromBody] RegisterOperatorDto registerOperator, CancellationToken cancellationToken)
@@ -30,11 +25,10 @@ namespace WebApi.Controllers
         }
 
         [HttpGet(Name = nameof(OperatorController.RecoverOperatorsAsync))]
-        public async Task<IActionResult> RecoverOperatorsAsync([FromQuery] Queryable queryable, CancellationToken cancellationToken)
+        [QueryableFilter]
+        public async Task<IActionResult> RecoverOperatorsAsync([FromQuery] int limit, [FromQuery] int offset, CancellationToken cancellationToken)
         {
-            _queryable.Bind(queryable);
-
-            var operators = await _operatorDomainService.RetrieveOperatorsAsync(cancellationToken);
+            var operators = await _operatorDomainService.RetrieveOperatorsAsync(limit, offset, cancellationToken);
             return Ok(operators);
         }
 

@@ -9,9 +9,7 @@ public interface INotificationContext
 
     bool HasNotifications { get; }
 
-    void AddNotification(string errorMessage);
+    void AddNotification(string field, string error);
 
-    void AddNotification(ValidationFailure validationFailure);
-
-    void AddNotification(ValidationResult validationResult);
+    void AddNotifications(List<ValidationFailure> validationsFailure);
 }

@@ -16,7 +16,7 @@ public class InventoryDomainService : IInventoryDomainService
 
     public async Task AddMorePpeAsync(AddPpeDto addPpeDto, CancellationToken cancellationToken)
     {
-        var inventory = await _inventoryService.GetInventoryByIdAsync(addPpeDto.InventoryId, cancellationToken);
+        var inventory = (await _inventoryService.GetInventoryByIdAsync(addPpeDto.InventoryId, cancellationToken)) as Inventory;
         inventory.AddAvailableQuantity(addPpeDto.Quantity);
 
         await _inventoryService.UpdateInventoryAsync(inventory, cancellationToken);

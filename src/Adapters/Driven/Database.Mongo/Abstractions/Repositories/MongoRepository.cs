@@ -1,4 +1,6 @@
-﻿using DataBase.Mongo.Context;
+﻿using Application.Abstractions.Pagination;
+using DataBase.Mongo.Abstractions.Repositories.Pagination;
+using DataBase.Mongo.Context;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
@@ -19,29 +21,50 @@ public abstract class MongoRepository : IMongoRepository
     public MongoRepository(IMongoContext mongoContext)
         => _mongoContext = mongoContext;
 
-    public Task<TCollection> FindAsync<TCollection>(Expression<Func<TCollection, bool>> predicate, CancellationToken cancellationToken)
+    public Task<TCollection> FindAsync<TCollection>(
+        Expression<Func<TCollection, bool>> predicate, 
+        CancellationToken cancellationToken)
         where TCollection : class
         => _mongoContext.GetCollection<TCollection>().AsQueryable().Where(predicate).FirstOrDefaultAsync(cancellationToken);
 
-    public async Task<IEnumerable<TCollection>> GetAllAsync<TCollection>(List<string> fields, CancellationToken cancellationToken)
+    public Task<TResult> FindDynamicallyAsync<TCollection, TResult>(
+        Expression<Func<TCollection, bool>> predicate,
+        Func<IQueryable<TCollection>, IQueryable<TResult>> select,
+        CancellationToken cancellationToken)
         where TCollection : class
     {
-        var projection = Builders<TCollection>.Projection;
-        ProjectionDefinition<TCollection> projectionDefinition = default;
+        var queryable = _mongoContext.GetCollection<TCollection>().AsQueryable().Where(predicate);
+        return (select(queryable) as IMongoQueryable<TResult>).FirstOrDefaultAsync(cancellationToken);
+    }
 
-        if (fields is not null && fields.Count > 0)
-        {
-            projectionDefinition = projection.Combine(fields.Select(field => projection.Include(field)));
+    public Task<IPagedResult<TCollection>> GetAllAsync<TCollection>(
+        Paging paging,
+        CancellationToken cancellationToken)
+        where TCollection : class
+    {
+        var queryable = _mongoContext
+            .GetCollection<TCollection>()
+            .AsQueryable();
 
-            var bsons = await _mongoContext.GetCollection<TCollection>()
-                .Find(Builders<TCollection>.Filter.Empty)
-                .Project(projectionDefinition)
-                .ToListAsync(cancellationToken);
+        return PagedResult<TCollection>.CreateAsync(paging, queryable, cancellationToken);
+    }
 
-            return bsons.Select(bson => BsonSerializer.Deserialize<TCollection>(bson));
-        }
+    public Task<IPagedResult<TResult>> GetAllDynamicallyAsync<TCollection, TResult>(
+        Paging paging,
+        Expression<Func<TCollection, bool>> predicate,
+        Func<IQueryable<TCollection>, IOrderedQueryable<TCollection>> orderBy,
+        Func<IQueryable<TCollection>, IQueryable<TResult>> select,
+        CancellationToken cancellationToken)
+        where TCollection : class
+    {
+        IQueryable<TCollection> queryable = _mongoContext
+            .GetCollection<TCollection>()
+            .AsQueryable();
 
-        return await _mongoContext.GetCollection<TCollection>().AsQueryable().ToListAsync(cancellationToken);
+        queryable = predicate is null ? queryable : queryable.Where(predicate);
+        queryable = orderBy is null ? queryable : orderBy(queryable);
+
+        return PagedResult<TResult>.CreateAsync(paging, select(queryable), cancellationToken);
     }
 
     public Task Upsert<TCollection>(Expression<Func<TCollection, bool>> predicate, TCollection replacementCollection, CancellationToken cancellationToken)

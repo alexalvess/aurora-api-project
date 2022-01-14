@@ -13,5 +13,5 @@ public interface IEntity
 
     bool IsValid { get; }
 
-    public IEnumerable<ValidationFailure> Errors { get; }
+    public List<ValidationFailure> Errors { get; }
 }

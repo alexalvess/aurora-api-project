@@ -16,6 +16,7 @@ public struct Nin : IValueType<string>
         _nin = nin;
         _errors = new List<ValidationFailure>();
         Validate();
+        Errors = _errors;
     }
 
     public bool IsValid { get => Errors?.Any() ?? true; }
@@ -33,7 +34,10 @@ public struct Nin : IValueType<string>
     private void Validate()
     {
         if (string.IsNullOrWhiteSpace(_nin))
+        {
             _errors.Add(new ValidationFailure(GetType().Name, "Is necessary to inform the CPF."));
+            return;
+        }
 
         int[] multiplierOne = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
         int[] multiplierTwo = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -45,7 +49,10 @@ public struct Nin : IValueType<string>
         value = _nin.Replace(".", "").Replace("-", "");
 
         if (value.Length != 11)
+        {
             _errors.Add(new ValidationFailure(GetType().Name, "CPF should have 11 chars."));
+            return;
+        }
 
         aux = value.Substring(0, 9);
         sum = 0;
@@ -78,8 +85,6 @@ public struct Nin : IValueType<string>
 
         if (!value.EndsWith(digit))
             _errors.Add(new ValidationFailure(GetType().Name, "This CPF is invalid."));
-
-        Errors = _errors;
     }
 
     public void Create(object value)

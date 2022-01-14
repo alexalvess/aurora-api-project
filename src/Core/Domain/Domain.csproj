@@ -3,4 +3,17 @@
     <PackageReference Include="FluentValidation" Version="$(FluentValidation_Version)" />
     <PackageReference Include="MongoDB.Bson" Version="$(MongoDB_Driver_Version)" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="DomainErrorsResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DomainErrorsResource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="DomainErrorsResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DomainErrorsResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

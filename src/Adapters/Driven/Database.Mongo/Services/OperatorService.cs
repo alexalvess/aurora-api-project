@@ -1,9 +1,14 @@
-﻿using Application.Ports.MongoServices;
+﻿using Application.Abstractions.Pagination;
+using Application.Ports.MongoServices;
+using DataBase.Mongo.Abstractions.Repositories.Pagination;
 using DataBase.Mongo.Repositories.OperatorRepository;
 using Domain.Aggregates.Employee.Operator;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Dynamic.Core;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,8 +30,6 @@ public class OperatorService : IOperatorService
     public Task<Operator> GetOperatorByIdAsync(ObjectId workerId, CancellationToken cancellationToken)
         => _operatorRepository.FindAsync<Operator>(prop => prop.Id.Equals(workerId), cancellationToken);
 
-    public Task<IEnumerable<Operator>> GetAllOperators(List<string> fields, CancellationToken cancellationToken)
-        => _operatorRepository.GetAllAsync<Operator>(fields, cancellationToken);
-
-
+    public Task<IPagedResult<Operator>> GetAllOperators(Paging paging, CancellationToken cancellationToken)
+        => _operatorRepository.GetAllAsync<Operator>(paging, cancellationToken);
 }

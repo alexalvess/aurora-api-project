@@ -12,7 +12,5 @@ public interface IInventoryService
 
     Task<Inventory> GetInventoryByIdAsync(ObjectId inventoryId, CancellationToken cancellationToken);
 
-    Task<List<Inventory>> GetAllInventoryAsync(CancellationToken cancellationToken);
-
     Task UpdateInventoryAsync(Inventory inventory, CancellationToken cancellationToken);
 }
