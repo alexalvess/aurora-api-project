@@ -14,6 +14,7 @@ using System;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
+using WebApi.DependencyInjection.Extensions;
 using WebApi.Filters;
 using WebApi.HostedServices;
 
@@ -65,20 +66,7 @@ if (app.Environment.IsDevelopment())
 var camelCaseConventionPack = new ConventionPack { new CamelCaseElementNameConvention() };
 ConventionRegistry.Register("CamelCase", camelCaseConventionPack, type => true);
 
-app.UseExceptionHandler(appBuilder => appBuilder.Run(async httpContext =>
-{
-    const string ERROR_MESSAGE = "Ocorreu um erro! Estamos trabalhando para solucionar a indisponibilidade. Por favor, tente novamente mais tarde.";
-
-    var exception = httpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
-
-    httpContext.Response.StatusCode = exception switch
-    {
-        OperationCanceledException or TaskCanceledException => 499,
-        _ => (int)HttpStatusCode.InternalServerError
-    };
-
-    await httpContext.Response.WriteAsJsonAsync(new Response(ERROR_MESSAGE));
-}));
+app.ConfigureExceptionHandler();
 
 app.UseHttpsRedirection();
 
