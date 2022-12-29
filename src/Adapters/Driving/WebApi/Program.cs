@@ -55,23 +55,32 @@ builder.Services
 builder.Services
     .AddScoped<Queryable>();
 
-var app = builder.Build();
+using var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+try
 {
+
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    var camelCaseConventionPack = new ConventionPack { new CamelCaseElementNameConvention() };
+    ConventionRegistry.Register("CamelCase", camelCaseConventionPack, type => true);
+
+    app.ConfigureExceptionHandler();
+
+    app.UseHttpsRedirection();
+
+    app.UseAuthorization();
+
+    app.MapControllers();
+
+    await app.RunAsync();
 }
-
-var camelCaseConventionPack = new ConventionPack { new CamelCaseElementNameConvention() };
-ConventionRegistry.Register("CamelCase", camelCaseConventionPack, type => true);
-
-app.ConfigureExceptionHandler();
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+catch (Exception ex)
+{
+    await app.StopAsync();
+}
+finally
+{
+    await app.DisposeAsync();
+}
