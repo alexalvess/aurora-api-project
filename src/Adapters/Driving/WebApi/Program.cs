@@ -20,6 +20,13 @@ using WebApi.HostedServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.UseDefaultServiceProvider((context, provider) =>
+{
+    provider.ValidateScopes =
+        provider.ValidateOnBuild =
+            context.HostingEnvironment.IsDevelopment();
+});
+
 builder.Services
     .AddControllers(options =>
     {
@@ -59,7 +66,6 @@ using var app = builder.Build();
 
 try
 {
-
     app.UseSwagger();
     app.UseSwaggerUI();
 
