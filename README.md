@@ -30,55 +30,17 @@ Besides that, this system allows that you see all the PPE and who has a PPE and 
 
 ## Architecture:
 * Hexagonal Architecture
-* S.O.L.I.D. principles
-* Clean Code
 * Domain Validations
 * Domain Notifications
-* Domain Driven Design
 * Repository Pattern
 * Notification Pattern
 * Value Types
+* Monolith
 
-## News:
-**v1.5 --- 2021-11-30**
-* Migrate to Hexagonal Architecture
-* Include MongoDB
-* Refactors to improve the code
-
-**v1.4 --- 2020-09-28**
-* CI/CD by GitHub Actions
-* Include integration tests using BDD with SpecFlow
-    * scenario of register a worker
-    * scenario of update a worker
-* Bug corrections
-
-**v1.3 --- 2020-07-30**
-* Changed some Primitive Types to Value Types
-* Changed the business idea principle
-
-**v1.2 --- 2020-06-30**
-* Implemented Notification Pattern
-* Implemented Domain Validations and Notifications
-* Using some concepts of Clean Architecture
-    * Entities
-    * Interface Adapters
-* Changed the framework validations to Flunt
-* Using mapper by extension methods
-
-**v1.1 --- 2020-06-24**
-* Updated the project name
-* Updated the project's SDK to .NET Core 3.1 version
-* Added the Swagger framework to document the API
-* Corrections to end-points
-* Published in Azure
-
-**v1.0 --- 2018-06-09**
-* Create the project in .NET Core 2.0 version
-* Structured the project on layer architecture 
-* Used the Service layer to business rules
-* Used the FluentValidation library
-* Configured the connection to MySql database
-* Used EntityFramework
+## Principles:
+* Domain Driven Design
+* Clean Code
+* S.O.L.I.D.
 
 ---
 
@@ -89,7 +51,6 @@ Besides that, this system allows that you see all the PPE and who has a PPE and 
 * It's very easy to include, or exclude, a framework or external library in a separate DLL.
 * The focus is in Core layer. So the business rules/your domain stay very uncoupled of external things.
 * I'm an enthusiast for this Design 😁🤓
-
 
 ---
 
@@ -106,6 +67,7 @@ The Aurora project was developed by [Alex Alves](https://www.linkedin.com/in/ale
 ---
 
 # References:
-* https://medium.com/@alexalves_85598/criando-uma-api-em-net-core-baseado-na-arquitetura-ddd-2c6a409c686
-* https://alexalvess.medium.com/organizando-seu-projeto-net-com-arquitetura-hexagonal-parte-01-a598662a3818
-* https://alexalvess.medium.com/organizando-seu-projeto-net-com-arquitetura-hexagonal-parte-02-fe9a8ed6ab02
+* [Start in .NET Core with Layer Architecture, Alex Alves](https://medium.com/@alexalves_85598/criando-uma-api-em-net-core-baseado-na-arquitetura-ddd-2c6a409c686)
+* [Organize your Project with Hexagon Architecture - Part 01, Alex Alves](https://alexalvess.medium.com/organizando-seu-projeto-net-com-arquitetura-hexagonal-parte-01-a598662a3818)
+* [Organize your Project with Hexagon Architecture - Part 02, Alex Alves](https://alexalvess.medium.com/organizando-seu-projeto-net-com-arquitetura-hexagonal-parte-02-fe9a8ed6ab02)
+* [Eventual Shop, a State of the art Distributed System, Antônio Falcão](https://github.com/AntonioFalcaoJr/EDA.CleanArch.DDD.CQRS.EventSourcing)
