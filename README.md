@@ -1,4 +1,4 @@
-﻿# ![](./.assets/logo_transparent.png)
+﻿![](./.assets/logo_transparent.png)
 
 # What is Aurora project?
 It's an open source project, written in .NET, currently in version 6.
