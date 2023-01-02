@@ -2,6 +2,7 @@ using Application.DependencyInjection.Extensions;
 using Application.Envelop;
 using DataBase.Mongo.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,59 +12,55 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Reflection;
 using WebApi.DependencyInjection.Extensions;
+using WebApi.DependencyInjection.Transformers;
 using WebApi.Filters;
 using WebApi.HostedServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Host.UseDefaultServiceProvider((context, provider) =>
-{
-    provider.ValidateScopes =
-        provider.ValidateOnBuild =
-            context.HostingEnvironment.IsDevelopment();
-});
+builder.Host
+    .UseDefaultServiceProvider((context, provider) =>
+    {
+        provider.ValidateScopes =
+            provider.ValidateOnBuild =
+                context.HostingEnvironment.IsDevelopment();
+    })
+    .ConfigureAppConfiguration((context, configurationBuilder) =>
+    {
+        configurationBuilder
+            .AddUserSecrets(Assembly.GetExecutingAssembly())
+            .AddEnvironmentVariables();
+    })
+    .ConfigureServices((context, services) =>
+    {
+        services.AddRouting(options => options.LowercaseUrls = false);
 
-builder.Host.ConfigureAppConfiguration((context, configurationBuilder) =>
-{
-    configurationBuilder
-        .AddUserSecrets(Assembly.GetExecutingAssembly())
-        .AddEnvironmentVariables();
-});
-
-builder.Host.ConfigureServices((context, services) =>
-{
-    services
-        .AddControllers(options => options.Filters.Add<ResponseFilter>())
-        .AddNewtonsoftJson(options =>
+        services.AddControllers(options =>
         {
-            options.SerializerSettings.ContractResolver = new DefaultContractResolver
-            {
-                NamingStrategy = new CamelCaseNamingStrategy()
-            };
-
-            options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Populate;
-            options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            options.Conventions.Add(new RouteTokenTransformerConvention(new SlugyParametersTransformer()));
+            options.SuppressAsyncSuffixInActionNames = true;
         });
 
-    services.AddHostedService<VerifyExperiedPpeService>();
+        services.AddHostedService<VerifyExperiedPpeService>();
 
-    services.AddEndpointsApiExplorer();
-    services.AddSwaggerGen();
+        services.AddEndpointsApiExplorer();
 
-    services
-        .AddMongoDbContext()
-        .AddMongoDbRepositories()
-        .AddMongoDbServices();
+        services.AddSwaggerGen();
 
-    services
-        .AddDomainServices();
+        services
+            .AddMongoDbContext()
+            .AddMongoDbRepositories()
+            .AddMongoDbServices();
 
-    services
-        .AddNotificationContext();
+        services
+            .AddDomainServices();
 
-    services
-        .AddScoped<Queryable>();
-});
+        services
+            .AddNotificationContext();
+
+        services
+            .AddScoped<Queryable>();
+    });
 
 using var app = builder.Build();
 
@@ -71,9 +68,6 @@ try
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-
-    var camelCaseConventionPack = new ConventionPack { new CamelCaseElementNameConvention() };
-    ConventionRegistry.Register("CamelCase", camelCaseConventionPack, type => true);
 
     app.ConfigureExceptionHandler();
 
