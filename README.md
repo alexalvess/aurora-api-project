@@ -1,4 +1,4 @@
-﻿![Aurora Project](./img/logo.png)
+﻿![](./.assets/logo_transparent.png)
 
 # What is Aurora project?
 It's an open source project, written in .NET, currently in version 6.
@@ -51,7 +51,7 @@ dotnet user-secrets set "ConnectionStrings:MongoDb" "[LOCAL_MONGODB_CONNECTIONST
 ---
 
 ## Hexagonal Architecture
-![Design Architectural](./img/aurora_architecture.png)
+![Design Architectural](./.assets/aurora_architecture.png)
 
 ### Why did I choose this design?
 * It's very easy to include, or exclude, a framework or external library in a separate DLL.
