@@ -17,8 +17,14 @@ Besides that, this system allows that you see all the PPE and who has a PPE and 
 ## How to use:
 1. Clone this project to into your machine
 2. Run MongoDB container (like on Docker)
+    2.2. This project using user-secrets, so you need to configure it
     2.1. Inform the right connection string in project
 3. Finally, build and run the application
+
+For user-secrets:
+```
+dotnet user-secrets set "ConnectionStrings:MongoDb" "[LOCAL_MONGODB_CONNECTIONSTRING]"
+```
 
 ## Technologies:
 * .NET 6

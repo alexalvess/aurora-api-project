@@ -2,12 +2,14 @@ using Application.DependencyInjection.Extensions;
 using Application.Envelop;
 using DataBase.Mongo.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MongoDB.Bson.Serialization.Conventions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
+using System.Reflection;
 using WebApi.DependencyInjection.Extensions;
 using WebApi.Filters;
 using WebApi.HostedServices;
@@ -19,6 +21,13 @@ builder.Host.UseDefaultServiceProvider((context, provider) =>
     provider.ValidateScopes =
         provider.ValidateOnBuild =
             context.HostingEnvironment.IsDevelopment();
+});
+
+builder.Host.ConfigureAppConfiguration((context, configurationBuilder) =>
+{
+    configurationBuilder
+        .AddUserSecrets(Assembly.GetExecutingAssembly())
+        .AddEnvironmentVariables();
 });
 
 builder.Host.ConfigureServices((context, services) =>
