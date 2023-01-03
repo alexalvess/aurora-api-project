@@ -10,7 +10,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace WebApi.Controllers
+namespace WebApi.Controllers.v1
 {
     [Route("api/[controller]")]
     [ApiController]
