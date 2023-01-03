@@ -10,16 +10,16 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace WebApi.Controllers
+namespace WebApi.Controllers.v1
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class OperatorController : ControllerBase
+    [ApiVersion("1")]
+    [ApiController, Route("api/v{version:apiVersion}/[controller]")]
+    public class OperatorsController : ControllerBase
     {
         private readonly IOperatorDomainService _operatorDomainService;
         private Queryable _queryable;
 
-        public OperatorController(IOperatorDomainService operatorDomainService, Queryable queryable)
+        public OperatorsController(IOperatorDomainService operatorDomainService, Queryable queryable)
             => (_operatorDomainService, _queryable) = (operatorDomainService, queryable);
 
         [HttpPost]
@@ -29,7 +29,7 @@ namespace WebApi.Controllers
             return CreatedAtRoute(nameof(this.RecoverOperatorByIdAsync), routeValues: new { id = operatorId.ToString() }, null);
         }
 
-        [HttpGet(Name = nameof(OperatorController.RecoverOperatorsAsync))]
+        [HttpGet(Name = nameof(OperatorsController.RecoverOperatorsAsync))]
         public async Task<IActionResult> RecoverOperatorsAsync([FromQuery] Queryable queryable, CancellationToken cancellationToken)
         {
             _queryable.Bind(queryable);
@@ -38,7 +38,7 @@ namespace WebApi.Controllers
             return Ok(operators);
         }
 
-        [HttpGet("{id}", Name = nameof(OperatorController.RecoverOperatorByIdAsync))]
+        [HttpGet("{id}", Name = nameof(OperatorsController.RecoverOperatorByIdAsync))]
         public async Task<IActionResult> RecoverOperatorByIdAsync([FromRoute] string id, CancellationToken cancellationToken)
         {
             var operatorDetails = await _operatorDomainService.RetrieveOperatorDetailsAsync(id, cancellationToken);
