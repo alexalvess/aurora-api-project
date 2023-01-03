@@ -45,6 +45,9 @@ builder.Host
 
         services.AddEndpointsApiExplorer();
 
+        services
+            .ConfigureApiVersioning();
+
         services.AddSwaggerGen();
 
         services
