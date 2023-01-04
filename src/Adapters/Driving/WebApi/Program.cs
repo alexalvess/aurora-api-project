@@ -6,14 +6,11 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MongoDB.Bson.Serialization.Conventions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using Serilog;
 using System;
 using System.Reflection;
 using WebApi.DependencyInjection.Extensions;
 using WebApi.DependencyInjection.Transformers;
-using WebApi.Filters;
 using WebApi.HostedServices;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +27,12 @@ builder.Host
         configurationBuilder
             .AddUserSecrets(Assembly.GetExecutingAssembly())
             .AddEnvironmentVariables();
+    })
+    .UseSerilog((context, loggerConfiguration) =>
+    {
+        loggerConfiguration
+            .ReadFrom
+            .Configuration(context.Configuration);
     })
     .ConfigureServices((context, services) =>
     {
@@ -77,6 +80,8 @@ try
     app.UseHttpsRedirection();
 
     app.UseAuthorization();
+
+    app.UseSerilogRequestLogging();
 
     app.MapControllers();
 
