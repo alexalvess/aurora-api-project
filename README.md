@@ -33,6 +33,7 @@ dotnet user-secrets set "ConnectionStrings:MongoDb" "[LOCAL_MONGODB_CONNECTIONST
 * FluentValidation
 * Swagger
 * .NET Core Native DI
+* Serilog
 
 ## Architecture:
 * Hexagonal Architecture
