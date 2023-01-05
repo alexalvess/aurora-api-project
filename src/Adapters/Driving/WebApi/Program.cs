@@ -66,6 +66,9 @@ builder.Host
 
         services
             .AddScoped<Queryable>();
+
+        services
+            .AddHealthChecks();
     });
 
 using var app = builder.Build();

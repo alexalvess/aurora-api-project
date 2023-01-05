@@ -9,5 +9,6 @@ namespace DataBase.Mongo.Context;
 
 public interface IMongoContext
 {
+    IMongoDatabase Database { get; }
     IMongoCollection<TCollection> GetCollection<TCollection>();
 }
