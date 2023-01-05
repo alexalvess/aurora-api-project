@@ -1,5 +1,6 @@
 ﻿using Application.Ports.MongoServices;
 using DataBase.Mongo.Context;
+using DataBase.Mongo.HealthChecks;
 using DataBase.Mongo.Repositories.OperatorRepository;
 using DataBase.Mongo.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,4 +19,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddMongoDbServices(this IServiceCollection services)
         => services
             .AddScoped<IOperatorService, OperatorService>();
+
+    public static IHealthChecksBuilder AddMongoHealthCheck(this IHealthChecksBuilder builder)
+        => builder.AddCheck<MongoHealthCheck>("MongoDb", tags: new[] { "ready" });
 }

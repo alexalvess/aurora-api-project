@@ -66,6 +66,10 @@ builder.Host
 
         services
             .AddScoped<Queryable>();
+
+        services
+            .AddHealthChecks()
+            .AddMongoHealthCheck();
     });
 
 using var app = builder.Build();
@@ -82,6 +86,8 @@ try
     app.UseAuthorization();
 
     app.UseSerilogRequestLogging();
+
+    app.ConfigureHealthChecks();
 
     app.MapControllers();
 
