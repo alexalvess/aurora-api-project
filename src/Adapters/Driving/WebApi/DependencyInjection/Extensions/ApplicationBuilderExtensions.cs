@@ -5,6 +5,12 @@ using System.Net;
 using System.Threading.Tasks;
 using System;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using WebApi.DependencyInjection.Transformers;
+using System.Linq;
+using System.Text.Json;
 
 namespace WebApi.DependencyInjection.Extensions;
 
@@ -25,4 +31,40 @@ public static class ApplicationBuilderExtensions
 
             await httpContext.Response.WriteAsJsonAsync(new Response(ERROR_MESSAGE));
         }));
+
+    public static void ConfigureHealthChecks(this IEndpointRouteBuilder routeBuilder)
+    {
+        routeBuilder.MapHealthChecks("health/live", new HealthCheckOptions
+        {
+            Predicate = _ => true
+        });
+
+        routeBuilder.MapHealthChecks("health/ready", new HealthCheckOptions
+        {
+            Predicate = healthCheck => healthCheck.Tags.Contains("ready"),
+            ResponseWriter = WriteResponse
+        });
+    }
+
+    private static Task WriteResponse(HttpContext httpContext, HealthReport healthReport)
+    {
+        var slugify = new SlugyParametersTransformer();
+
+        var body = new
+        {
+            status = healthReport.Status.ToString(),
+            results = healthReport.Entries.Select(entry => new
+            {
+                status = entry.Value.Status.ToString(),
+                description = slugify.TransformOutbound(entry.Key.Replace("HealthCheck", string.Empty))
+            })
+        };
+
+        httpContext.Response.ContentType = "application/json";
+
+        return httpContext.Response.WriteAsync(JsonSerializer.Serialize(body, options: new JsonSerializerOptions
+        {
+            WriteIndented = true
+        }).ToString());
+    }
 }
