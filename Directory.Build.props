@@ -1,8 +1,8 @@
 <Project>
 
 	<PropertyGroup Label="Common properties">
-		<TargetFramework>net6.0</TargetFramework>
-		<LangVersion>10</LangVersion>
+		<TargetFramework>net7.0</TargetFramework>
+		<LangVersion>preview</LangVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Label="Packages dependency versions">
