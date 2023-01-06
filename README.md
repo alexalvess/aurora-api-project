@@ -27,8 +27,8 @@ dotnet user-secrets set "ConnectionStrings:MongoDb" "[LOCAL_MONGODB_CONNECTIONST
 ```
 
 ## Technologies:
-* .NET 6
-* C# 10
+* .NET 7
+* C# previewer
 * MongoDB
 * FluentValidation
 * Swagger
